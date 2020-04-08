@@ -1,5 +1,45 @@
 ﻿$(document).ready(function () {
 
+    var employeePositionsTable = $('#employee-positions').DataTable({
+        ajax: {
+            url: "/api/employeePositions",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "name",
+                render: function (data, type, service) {
+                    return "<a href='/employeePositions/edit/" + service.id + "'>" + service.title + "</a>";
+                }
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/employeePositions/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/employeePositions/delete/" + data + "' class='btn-link js-delete' data-employeePosition-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#employee-positions").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цю посаду?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/employeePositions/" + button.attr("data-employeePosition-id"),
+                    method: "DELETE",
+                    success: function () {
+                        employeePositionsTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
     var serviceTypesTable = $('#service-types').DataTable({
         ajax: {
             url: "/api/serviceTypes",
@@ -36,7 +76,7 @@
                     url: "/api/serviceTypes/" + button.attr("data-serviceType-id"),
                     method: "DELETE",
                     success: function () {
-                        brandsTable.row(button.parents("tr")).remove().draw();
+                        serviceTypesTable.row(button.parents("tr")).remove().draw();
                     }
                 });
             }

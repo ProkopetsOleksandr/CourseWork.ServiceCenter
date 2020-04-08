@@ -1,0 +1,43 @@
+﻿@model CourseWork.ServiceCenter.Models.EmployeePosition
+@{
+    ViewBag.Title = "EmployeePositionForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Id == 0)
+{
+    <h2>Новий посада</h2>
+}
+else
+{
+    <h2>Редагування посади (id: @Model.Id)</h2>
+}
+
+@using (Html.BeginForm("Save", "EmployeePositions"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    
+    <div class="form-group">
+        @Html.LabelFor(c => c.Title)
+        @Html.TextBoxFor(c => c.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Title)
+    </div>
+
+    @Html.HiddenFor(c => c.Id)
+    @Html.AntiForgeryToken()
+
+    if(Model.Id == 0)
+    {
+        <button type="submit" class="btn btn-success">Створити</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Зберігти</button>
+    }
+    
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -187,10 +187,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BrandsController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
+    <Compile Include="Controllers\API\EmployeePositionsController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
     <Compile Include="Controllers\API\ServiceTypesController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\EmployeePositionsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -300,6 +302,8 @@
     <Content Include="Views\Brands\BrandForm.cshtml" />
     <Content Include="Views\ServiceTypes\ServiceTypeForm.cshtml" />
     <Content Include="Views\ServiceTypes\Index.cshtml" />
+    <Content Include="Views\EmployeePositions\Index.cshtml" />
+    <Content Include="Views\EmployeePositions\EmployeePositionForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

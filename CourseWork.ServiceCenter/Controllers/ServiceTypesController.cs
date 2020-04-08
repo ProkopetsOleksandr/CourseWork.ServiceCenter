@@ -23,7 +23,7 @@ namespace CourseWork.ServiceCenter.Controllers
         // GET: ServiceTypes
         public ActionResult Index()
         {
-            return View(_context.ServiceTypes.ToList());
+            return View();
         }
 
         // GET: ServiceTypes/Create
