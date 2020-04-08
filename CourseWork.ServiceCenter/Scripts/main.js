@@ -1,4 +1,115 @@
-﻿(function ($) {
+﻿$(document).ready(function () {
+
+
+    var employeesTable = $('#employees').DataTable({
+        ajax: {
+            url: "/api/employees",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "name",
+                render: function (data, type, employee) {
+                    return "<a href='/employees/edit/" + employee.id + "'>" + employee.name + "</a>";
+                }
+            },
+            {
+                data: "phone"
+            },
+            {
+                data: "address"
+            },
+            {
+                data: "birthday",
+                render: function (data) {
+                    return data.substr(0, 10);
+                }
+            },
+            {
+                data: "employeePosition.title"
+            },
+            {
+                data: "serviceCenter",
+                render: function (data) {
+                    return "<a href='/service-center/" + data.id + "'>" + data.centerNumber + "</a>";
+                }
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/employee/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/employee/delete/" + data + "' class='btn-link js-delete' data-employee-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#employees").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цього працівника?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/employees/" + button.attr("data-employee-id"),
+                    method: "DELETE",
+                    success: function () {
+                        employeesTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
+
+    var customersTable = $('#customers').DataTable({
+        ajax: {
+            url: "/api/customers",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "name",
+                render: function (data, type, customer) {
+                    return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                }
+            },
+            {
+                data: "phone"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/customers/edit/" + data +"' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                                                        "<a href='/customer/delete/" + data + "' class='btn-link js-delete' data-customer-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#customers").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цього клієнта?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/customers/" + button.attr("data-customer-id"),
+                    method: "DELETE",
+                    success: function () {
+                        customersTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+});
+
+
+
+(function ($) {
     "use strict";
 
     // Add active state to sidbar nav links

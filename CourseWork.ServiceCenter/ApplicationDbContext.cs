@@ -6,7 +6,11 @@ namespace CourseWork.ServiceCenter
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Part> Parts;
+
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeePosition> EmployeePositions { get; set; }
+        public DbSet<Models.ServiceCenter> ServiceCenters { get; set; }
 
 
         public ApplicationDbContext()

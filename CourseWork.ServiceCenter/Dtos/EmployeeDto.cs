@@ -1,11 +1,10 @@
-using System;
+Ôªøusing System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseWork.ServiceCenter.Models
+namespace CourseWork.ServiceCenter.Dtos
 {
-    [Table("Employee")]
-    public partial class Employee
+    public class EmployeeDto
     {
         public int Id { get; set; }
 
@@ -24,13 +23,12 @@ namespace CourseWork.ServiceCenter.Models
         [Column(TypeName = "date")]
         public DateTime Birthday { get; set; }
 
-        [Display(Name = "œÓÒ‡‰‡")]
         public int EmployeePositionId { get; set; }
 
         public int ServiceCenterId { get; set; }
 
-        public EmployeePosition EmployeePosition { get; set; }
+        public EmployeePositionDto EmployeePosition { get; set; }
 
-        public ServiceCenter ServiceCenter { get; set; }
+        public ServiceCenterDto ServiceCenter { get; set; }
     }
 }

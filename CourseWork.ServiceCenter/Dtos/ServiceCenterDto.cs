@@ -1,10 +1,9 @@
+﻿using CourseWork.ServiceCenter.Dtos;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseWork.ServiceCenter.Models
+namespace CourseWork.ServiceCenter.Dtos
 {
-    [Table("ServiceCenter")]
-    public class ServiceCenter
+    public class ServiceCenterDto
     {
         public int Id { get; set; }
 
@@ -21,6 +20,6 @@ namespace CourseWork.ServiceCenter.Models
 
         public int CityId { get; set; }
 
-        public virtual City City { get; set; }
+        public virtual CityDto City { get; set; }
     }
 }

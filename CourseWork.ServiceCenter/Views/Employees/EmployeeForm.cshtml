@@ -1,0 +1,74 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.EmployeeFormViewModel
+@{
+    ViewBag.Title = "EmployeeForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model.Employee.Id == 0)
+{
+    <h2>Новий працівник</h2>
+}
+else
+{
+    <h2>Редагування працівника (id: @Model.Employee.Id)</h2>
+}
+
+@using (Html.BeginForm("Save", "Employees"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Employee.Name)
+        @Html.TextBoxFor(e => e.Employee.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Employee.Phone)
+        @Html.TextBoxFor(e => e.Employee.Phone, new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.Phone)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Employee.Address)
+        @Html.TextBoxFor(e => e.Employee.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.Address)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Employee.Birthday)
+        @Html.TextBoxFor(e => e.Employee.Birthday, "{0:d-MM-yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.Birthday)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Employee.EmployeePositionId)
+        @Html.DropDownListFor(e => e.Employee.EmployeePositionId, new SelectList(Model.EmployeePositions, "Id", "Title"), "Оберіть посаду", new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.EmployeePositionId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(e => e.Employee.ServiceCenterId)
+        @Html.DropDownListFor(e => e.Employee.ServiceCenterId, new SelectList(Model.ServiceCenters, "Id", "CenterNumber"), "Оберіть сервіс центр", new { @class = "form-control" })
+        @Html.ValidationMessageFor(e => e.Employee.ServiceCenterId)
+    </div>
+
+    @Html.HiddenFor(c => c.Employee.Id)
+    @Html.AntiForgeryToken()
+
+    if (Model.Employee.Id == 0)
+    {
+        <button type="submit" class="btn btn-success">Створити</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Зберігти</button>
+    }
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

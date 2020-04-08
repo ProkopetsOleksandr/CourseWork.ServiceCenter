@@ -8,9 +8,6 @@ namespace CourseWork.ServiceCenter
         // Дополнительные сведения об объединении см. на странице https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -23,11 +20,20 @@ namespace CourseWork.ServiceCenter
                       "~/Scripts/bootstrap.js"));
 
 
-            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+            bundles.Add(new ScriptBundle("~/bundles/lib").Include(
+                      "~/Scripts/jquery-{version}.js",
+                      "~/Scripts/bootbox.js",
                       "~/Scripts/main.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/dataTable").Include(
+                "~/Scripts/DataTables/jquery.dataTables.js",
+                "~/Scripts/DataTables/dataTables.bootstrap4.js"));
+
+
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                      "~/Content/layout.css"
+                      "~/Content/layout.css",
+                      "~/Content/DataTables/dataTables.bootstrap4.css",
+                      "~/Content/main.css"
                       ));
         }
     }
