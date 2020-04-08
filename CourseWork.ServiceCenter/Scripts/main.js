@@ -1,5 +1,46 @@
 ﻿$(document).ready(function () {
 
+
+    var deviceTypesTable = $('#device-types').DataTable({
+        ajax: {
+            url: "/api/deviceTypes",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "title",
+                render: function (data, type, deviceType) {
+                    return "<a href='/deviceTypes/edit/" + deviceType.id + "'>" + deviceType.title + "</a>";
+                }
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/deviceTypes/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/deviceTypes/delete/" + data + "' class='btn-link js-delete' data-deviceType-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#device-types").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цей тип пристроїв?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/deviceTypes/" + button.attr("data-DeviceType-id"),
+                    method: "DELETE",
+                    success: function () {
+                        deviceTypesTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
     var employeePositionsTable = $('#employee-positions').DataTable({
         ajax: {
             url: "/api/employeePositions",
@@ -7,7 +48,7 @@
         },
         columns: [
             {
-                data: "name",
+                data: "title",
                 render: function (data, type, service) {
                     return "<a href='/employeePositions/edit/" + service.id + "'>" + service.title + "</a>";
                 }

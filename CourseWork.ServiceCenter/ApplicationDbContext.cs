@@ -16,6 +16,7 @@ namespace CourseWork.ServiceCenter
         public DbSet<Part> Parts { get; set; }
         public DbSet<ServiceAppliance> ServiceAppliances { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<DeviceType> DeviceTypes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

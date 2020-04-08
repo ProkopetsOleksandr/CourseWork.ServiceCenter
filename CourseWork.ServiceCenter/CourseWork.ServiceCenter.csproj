@@ -187,11 +187,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BrandsController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
+    <Compile Include="Controllers\API\DeviceTypesController.cs" />
     <Compile Include="Controllers\API\EmployeePositionsController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
     <Compile Include="Controllers\API\ServiceTypesController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DeviceTypesController.cs" />
     <Compile Include="Controllers\EmployeePositionsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="Dtos\BrandDto.cs" />
     <Compile Include="Dtos\CityDto.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
+    <Compile Include="Dtos\DeviceTypeDto.cs" />
     <Compile Include="Dtos\EmployeeDto.cs" />
     <Compile Include="Dtos\EmployeePositionDto.cs" />
     <Compile Include="Dtos\ServiceCenterDto.cs" />
@@ -304,6 +307,8 @@
     <Content Include="Views\ServiceTypes\Index.cshtml" />
     <Content Include="Views\EmployeePositions\Index.cshtml" />
     <Content Include="Views\EmployeePositions\EmployeePositionForm.cshtml" />
+    <Content Include="Views\DeviceTypes\Index.cshtml" />
+    <Content Include="Views\DeviceTypes\DeviceTypeForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
