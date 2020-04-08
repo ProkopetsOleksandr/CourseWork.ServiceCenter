@@ -1,5 +1,87 @@
 ﻿$(document).ready(function () {
 
+    var serviceTypesTable = $('#service-types').DataTable({
+        ajax: {
+            url: "/api/serviceTypes",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "name",
+                render: function (data, type, service) {
+                    return "<a href='/serviceTypes/edit/" + service.id + "'>" + service.name + "</a>";
+                }
+            },
+            {
+                data: "price"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/serviceTypes/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/serviceTypes/delete/" + data + "' class='btn-link js-delete' data-serviceType-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#service-types").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цей сервіс?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/serviceTypes/" + button.attr("data-serviceType-id"),
+                    method: "DELETE",
+                    success: function () {
+                        brandsTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
+    var brandsTable = $('#brands').DataTable({
+        ajax: {
+            url: "/api/brands",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "title",
+                render: function (data, type, brand) {
+                    return "<a href='/brands/edit/" + brand.id + "'>" + brand.title + "</a>";
+                }
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/brands/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/brands/delete/" + data + "' class='btn-link js-delete' data-brand-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#brands").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цей бренд?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/brands/" + button.attr("data-brand-id"),
+                    method: "DELETE",
+                    success: function () {
+                        brandsTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
 
     var employeesTable = $('#employees').DataTable({
         ajax: {

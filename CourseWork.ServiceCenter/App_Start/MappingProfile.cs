@@ -23,8 +23,11 @@ namespace CourseWork.ServiceCenter.App_Start
             Mapper.CreateMap<Models.ServiceCenter, ServiceCenterDto>();
             Mapper.CreateMap <ServiceCenterDto, Models.ServiceCenter>();
 
+            Mapper.CreateMap<Brand, BrandDto>();
+            Mapper.CreateMap<BrandDto, Brand>();
 
-
+            Mapper.CreateMap<ServiceType, ServiceTypeDto>();
+            Mapper.CreateMap<ServiceTypeDto, ServiceType>();
 
         }
     }

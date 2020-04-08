@@ -1,0 +1,43 @@
+﻿@model CourseWork.ServiceCenter.Models.Brand
+@{
+    ViewBag.Title = "BrandForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model.Id == 0)
+{
+    <h2>Новий Бренд</h2>
+}
+else
+{
+    <h2>Редагування бренда (id: @Model.Id)</h2>
+}
+
+@using (Html.BeginForm("Save", "Brands"))
+{
+    @Html.ValidationSummary(true, "Будь ласка виправте всі помилки.")
+
+    <div class="form-group">
+        @Html.LabelFor(b => b.Title)
+        @Html.TextBoxFor(b => b.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(b => b.Title)
+    </div>
+
+    @Html.HiddenFor(b => b.Id)
+    @Html.AntiForgeryToken()
+
+    if (Model.Id == 0)
+    {
+        <button type="submit" class="btn btn-success">Створити</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Зберігти</button>
+    }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

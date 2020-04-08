@@ -1,0 +1,52 @@
+﻿@model CourseWork.ServiceCenter.Models.ServiceType
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model.Id == 0)
+{
+    <h2>Новий тип сервісу</h2>
+}
+else
+{
+    <h2>Редагування типу сервісу (id: @Model.Id)</h2>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price)
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control" } )
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+    </div>
+
+    if (Model.Id == 0)
+    {
+        <button type="submit" class="btn btn-success">Створити</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Зберігти</button>
+    }
+
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

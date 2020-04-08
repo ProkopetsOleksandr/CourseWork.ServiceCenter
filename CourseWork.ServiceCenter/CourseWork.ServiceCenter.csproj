@@ -185,17 +185,23 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\BrandsController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
+    <Compile Include="Controllers\API\ServiceTypesController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ServiceTypesController.cs" />
+    <Compile Include="Dtos\BrandDto.cs" />
     <Compile Include="Dtos\CityDto.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\EmployeeDto.cs" />
     <Compile Include="Dtos\EmployeePositionDto.cs" />
     <Compile Include="Dtos\ServiceCenterDto.cs" />
+    <Compile Include="Dtos\ServiceTypeDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -290,6 +296,10 @@
     <Content Include="Views\Customers\CustomerForm.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\EmployeeForm.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Brands\BrandForm.cshtml" />
+    <Content Include="Views\ServiceTypes\ServiceTypeForm.cshtml" />
+    <Content Include="Views\ServiceTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

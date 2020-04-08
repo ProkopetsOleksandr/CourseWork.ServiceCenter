@@ -1,30 +1,29 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CourseWork.ServiceCenter.Models
 {
-    public partial class Part
+    public class Part
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(300)]
-        public string model { get; set; }
+        public string Model { get; set; }
 
-        public int warrantyPeriod { get; set; }
+        public int WarrantyPeriod { get; set; }
 
-        public decimal price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         [StringLength(10)]
-        public string partCode { get; set; }
+        public string PartCode { get; set; }
 
-        public int partCategoryId { get; set; }
+        public int PartCategoryId { get; set; }
 
-        public int brandId { get; set; }
+        public int BrandId { get; set; }
 
-        public virtual Brand Brand { get; set; }
+        public Brand Brand { get; set; }
 
-        public virtual PartCategory PartCategory { get; set; }
+        public PartCategory PartCategory { get; set; }
     }
 }
