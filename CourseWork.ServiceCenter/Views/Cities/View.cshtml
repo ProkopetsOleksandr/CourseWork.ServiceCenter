@@ -1,0 +1,47 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.CityFormViewModel
+@{
+    ViewBag.Title = "ViewCity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        Інформація про місто
+    </div>
+    <div class="card-body">
+        <div class="table-responsive mb-5">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td style="max-width: 30px;">Назва</td>
+                        <td>@Model.City.Title</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h5>Сервіс центри в місті:</h5>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Номер</th>
+                        <th>Номер телефону</th>
+                        <th>Адреса</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var center in Model.ServiceCenters)
+                    {
+                        <tr>
+                            <td><a href="/serviceCenter/@center.Id">@center.CenterNumber</a></td>
+                            <td>@center.Phone</td>
+                            <td>@center.Address</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

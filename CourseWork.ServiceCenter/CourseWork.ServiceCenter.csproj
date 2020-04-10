@@ -186,12 +186,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BrandsController.cs" />
+    <Compile Include="Controllers\API\CitiesController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
     <Compile Include="Controllers\API\DeviceTypesController.cs" />
     <Compile Include="Controllers\API\EmployeePositionsController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
     <Compile Include="Controllers\API\ServiceTypesController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
+    <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DeviceTypesController.cs" />
     <Compile Include="Controllers\EmployeePositionsController.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CityFormViewModel.cs" />
     <Compile Include="ViewModels\EmployeeFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +312,9 @@
     <Content Include="Views\EmployeePositions\EmployeePositionForm.cshtml" />
     <Content Include="Views\DeviceTypes\Index.cshtml" />
     <Content Include="Views\DeviceTypes\DeviceTypeForm.cshtml" />
+    <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Cities\CityForm.cshtml" />
+    <Content Include="Views\Cities\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

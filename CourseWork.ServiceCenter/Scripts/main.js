@@ -1,5 +1,45 @@
 ﻿$(document).ready(function () {
 
+    var citiesTable = $('#cities').DataTable({
+        ajax: {
+            url: "/api/cities",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "title",
+                render: function (data, type, city) {
+                    return "<a href='/cities/view/" + city.id + "'>" + city.title + "</a>";
+                }
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/cities/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/cities/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
+                        "<a href='/cities/delete/" + data + "' class='btn-link js-delete' data-city-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#cities").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити це місто?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/cities/" + button.attr("data-city-id"),
+                    method: "DELETE",
+                    success: function () {
+                        citiesTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
 
     var deviceTypesTable = $('#device-types').DataTable({
         ajax: {
@@ -8,15 +48,12 @@
         },
         columns: [
             {
-                data: "title",
-                render: function (data, type, deviceType) {
-                    return "<a href='/deviceTypes/edit/" + deviceType.id + "'>" + deviceType.title + "</a>";
-                }
+                data: "title"
             },
             {
                 data: "id",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/deviceTypes/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                    var btns = "<div class='actions-btn'><a href='/deviceTypes/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
                         "<a href='/deviceTypes/delete/" + data + "' class='btn-link js-delete' data-deviceType-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
@@ -48,15 +85,12 @@
         },
         columns: [
             {
-                data: "title",
-                render: function (data, type, service) {
-                    return "<a href='/employeePositions/edit/" + service.id + "'>" + service.title + "</a>";
-                }
+                data: "title"
             },
             {
                 data: "id",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/employeePositions/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                    var btns = "<div class='actions-btn'><a href='/employeePositions/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
                         "<a href='/employeePositions/delete/" + data + "' class='btn-link js-delete' data-employeePosition-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
@@ -88,10 +122,7 @@
         },
         columns: [
             {
-                data: "name",
-                render: function (data, type, service) {
-                    return "<a href='/serviceTypes/edit/" + service.id + "'>" + service.name + "</a>";
-                }
+                data: "name"
             },
             {
                 data: "price"
@@ -99,7 +130,7 @@
             {
                 data: "id",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/serviceTypes/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                    var btns = "<div class='actions-btn'><a href='/serviceTypes/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
                         "<a href='/serviceTypes/delete/" + data + "' class='btn-link js-delete' data-serviceType-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
@@ -131,15 +162,12 @@
         },
         columns: [
             {
-                data: "title",
-                render: function (data, type, brand) {
-                    return "<a href='/brands/edit/" + brand.id + "'>" + brand.title + "</a>";
-                }
+                data: "title"
             },
             {
                 data: "id",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/brands/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                    var btns = "<div class='actions-btn'><a href='/brands/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
                         "<a href='/brands/delete/" + data + "' class='btn-link js-delete' data-brand-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
@@ -171,10 +199,7 @@
         },
         columns: [
             {
-                data: "name",
-                render: function (data, type, employee) {
-                    return "<a href='/employees/edit/" + employee.id + "'>" + employee.name + "</a>";
-                }
+                data: "name"
             },
             {
                 data: "phone"
@@ -200,7 +225,7 @@
             {
                 data: "id",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/employee/edit/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                    var btns = "<div class='actions-btn'><a href='/employee/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
                         "<a href='/employee/delete/" + data + "' class='btn-link js-delete' data-employee-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
@@ -225,7 +250,6 @@
         });
     });
 
-
     var customersTable = $('#customers').DataTable({
         ajax: {
             url: "/api/customers",
@@ -233,10 +257,7 @@
         },
         columns: [
             {
-                data: "name",
-                render: function (data, type, customer) {
-                    return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
-                }
+                data: "name"
             },
             {
                 data: "phone"
@@ -244,7 +265,7 @@
             {
                 data: "id",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/customers/edit/" + data +"' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                    var btns = "<div class='actions-btn'><a href='/customers/edit/" + data +"' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
                                                         "<a href='/customer/delete/" + data + "' class='btn-link js-delete' data-customer-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
