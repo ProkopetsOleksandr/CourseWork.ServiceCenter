@@ -31,6 +31,9 @@ namespace CourseWork.ServiceCenter.App_Start
 
             Mapper.CreateMap<DeviceType, DeviceTypeDto>();
             Mapper.CreateMap<DeviceTypeDto, DeviceType>();
+
+            Mapper.CreateMap<PartCategory, PartCategoryDto>();
+            Mapper.CreateMap<PartCategoryDto, PartCategory>();
         }
     }
 }

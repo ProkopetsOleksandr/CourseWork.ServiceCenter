@@ -1,5 +1,43 @@
 ﻿$(document).ready(function () {
 
+    var partCategoriesTable = $('#part-categories').DataTable({
+        ajax: {
+            url: "/api/partCategories",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "title"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/partCategories/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
+                        "<a href='/partCategories/delete/" + data + "' class='btn-link js-delete' data-category-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#part-categories").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цю категорію?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/partCategories/" + button.attr("data-category-id"),
+                    method: "DELETE",
+                    success: function () {
+                        partCategoriesTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
+
     var citiesTable = $('#cities').DataTable({
         ajax: {
             url: "/api/cities",

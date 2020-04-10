@@ -191,6 +191,7 @@
     <Compile Include="Controllers\API\DeviceTypesController.cs" />
     <Compile Include="Controllers\API\EmployeePositionsController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
+    <Compile Include="Controllers\API\PartCategoriesController.cs" />
     <Compile Include="Controllers\API\ServiceTypesController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PartCategoriesController.cs" />
     <Compile Include="Controllers\ServiceTypesController.cs" />
     <Compile Include="Dtos\BrandDto.cs" />
     <Compile Include="Dtos\CityDto.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="Dtos\DeviceTypeDto.cs" />
     <Compile Include="Dtos\EmployeeDto.cs" />
     <Compile Include="Dtos\EmployeePositionDto.cs" />
+    <Compile Include="Dtos\PartCategoryDto.cs" />
     <Compile Include="Dtos\ServiceCenterDto.cs" />
     <Compile Include="Dtos\ServiceTypeDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -315,9 +318,12 @@
     <Content Include="Views\Cities\Index.cshtml" />
     <Content Include="Views\Cities\CityForm.cshtml" />
     <Content Include="Views\Cities\View.cshtml" />
+    <Content Include="Views\PartCategories\Index.cshtml" />
+    <Content Include="Views\PartCategories\PartCategoryForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PartCategory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
