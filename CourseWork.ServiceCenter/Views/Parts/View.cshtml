@@ -1,0 +1,39 @@
+﻿@model CourseWork.ServiceCenter.Models.Part
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        Інформація про запчастину
+    </div>
+    <div class="card-body">
+        <div class="table-responsive mb-5">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Код</td>
+                        <td>@Model.PartCode</td>
+                    </tr>
+                    <tr>
+                        <td>Модель</td>
+                        <td>@Model.Model</td>
+                    </tr>
+                    <tr>
+                        <td>Ціна</td>
+                        <td>@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Бренд</td>
+                        <td>@Model.Brand.Title</td>
+                    </tr>
+                    <tr>
+                        <td>Категорія</td>
+                        <td>@Model.PartCategory.Title</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

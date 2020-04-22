@@ -34,6 +34,9 @@ namespace CourseWork.ServiceCenter.App_Start
 
             Mapper.CreateMap<PartCategory, PartCategoryDto>();
             Mapper.CreateMap<PartCategoryDto, PartCategory>();
+
+            Mapper.CreateMap<Part, PartDto>();
+            Mapper.CreateMap<PartDto, Part>();
         }
     }
 }

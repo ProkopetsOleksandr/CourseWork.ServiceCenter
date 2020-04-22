@@ -1,0 +1,73 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.PartFormViewModel
+@{
+    ViewBag.Title = "PartForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model.Part.Id == 0)
+{
+    <h2>Нова запчастина</h2>
+}
+else
+{
+    <h2>Редагування запчастини (id: @Model.Part.Id)</h2>
+}
+
+@using (Html.BeginForm("Save", "Parts"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Part.Model)
+        @Html.TextBoxFor(p => p.Part.Model, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Part.Model)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Part.WarrantyPeriod)
+        @Html.TextBoxFor(p => p.Part.WarrantyPeriod, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Part.WarrantyPeriod)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Part.Price)
+        @Html.TextBoxFor(p => p.Part.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Part.Price)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Part.PartCode)
+        @Html.TextBoxFor(p => p.Part.PartCode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Part.PartCode)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Part.PartCategoryId)
+        @Html.DropDownListFor(p => p.Part.PartCategoryId, new SelectList(Model.PartCategories, "Id", "Title"), "Оберіть категорію запчастини", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Part.PartCategoryId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(p => p.Part.BrandId)
+        @Html.DropDownListFor(p => p.Part.BrandId, new SelectList(Model.Brands, "Id", "Title"), "Оберіть бренд", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Part.BrandId)
+    </div>
+
+    @Html.HiddenFor(c => c.Part.Id)
+    @Html.AntiForgeryToken()
+
+    if (Model.Part.Id == 0)
+    {
+        <button type="submit" class="btn btn-success">Створити</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Зберігти</button>
+    }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

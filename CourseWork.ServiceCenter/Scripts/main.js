@@ -1,5 +1,53 @@
 ﻿$(document).ready(function () {
 
+    var partsTable = $('#parts').DataTable({
+        ajax: {
+            url: "/api/parts",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "model"
+            },
+            {
+                data: "partCategory.title"
+            },
+            {
+                data: "brand.title"
+            },
+            {
+                data: "price"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/parts/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/parts/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
+                        "<a href='/parts/delete/" + data + "' class='btn-link js-delete' data-part-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#parts").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цю запчастину?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/parts/" + button.attr("data-part-id"),
+                    method: "DELETE",
+                    success: function () {
+                        partsTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
+
     var partCategoriesTable = $('#part-categories').DataTable({
         ajax: {
             url: "/api/partCategories",
@@ -36,7 +84,6 @@
             }
         });
     });
-
 
     var citiesTable = $('#cities').DataTable({
         ajax: {

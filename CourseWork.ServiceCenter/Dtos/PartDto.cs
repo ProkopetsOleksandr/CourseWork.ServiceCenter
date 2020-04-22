@@ -1,10 +1,9 @@
+﻿using CourseWork.ServiceCenter.Models;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseWork.ServiceCenter.Models
+namespace CourseWork.ServiceCenter.Dtos
 {
-    [Table("Part")]
-    public class Part
+    public class PartDto
     {
         public int Id { get; set; }
 
