@@ -37,6 +37,9 @@ namespace CourseWork.ServiceCenter.App_Start
 
             Mapper.CreateMap<Part, PartDto>();
             Mapper.CreateMap<PartDto, Part>();
+
+            Mapper.CreateMap<ServiceAppliance, ServiceApplianceDto>();
+            Mapper.CreateMap<ServiceApplianceDto, ServiceAppliance>();
         }
     }
 }

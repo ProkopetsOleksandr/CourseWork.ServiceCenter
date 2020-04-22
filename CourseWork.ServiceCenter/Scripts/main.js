@@ -1,5 +1,49 @@
 ﻿$(document).ready(function () {
 
+    var appliancesTable = $('#service-appliance').DataTable({
+        ajax: {
+            url: "/api/serviceAppliances",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "model"
+            },
+            {
+                data: "brand.title"
+            },
+            {
+                data: "deviceType.title"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'>" +
+                        "<a href='/serviceAppliances/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
+                        "<a href='/serviceAppliances/delete/" + data + "' class='btn-link js-delete' data-appliance-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#service-appliance").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цю техніку?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/serviceAppliances/" + button.attr("data-appliance-id"),
+                    method: "DELETE",
+                    success: function () {
+                        appliancesTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
     var partsTable = $('#parts').DataTable({
         ajax: {
             url: "/api/parts",
@@ -46,7 +90,6 @@
             }
         });
     });
-
 
     var partCategoriesTable = $('#part-categories').DataTable({
         ajax: {

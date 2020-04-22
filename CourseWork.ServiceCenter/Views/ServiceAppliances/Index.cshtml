@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.ActionLink("Створити нову", "New", "ServiceAppliances", null, new { @class = "btn btn-success mt-4" })
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i> Побутова техніка
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="service-appliance" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Модель</th>
+                        <th>Бренд</th>
+                        <th>Тип</th>
+                        <th style="max-width: 150px;">Дії</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Модель</th>
+                        <th>Бренд</th>
+                        <th>Тип</th>
+                        <th style="max-width: 150px;">Дії</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+}
+
+
+
+
+
+
+
+
+

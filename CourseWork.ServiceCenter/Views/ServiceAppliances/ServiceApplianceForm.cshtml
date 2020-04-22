@@ -1,0 +1,54 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.ServiceApplianceViewModel
+@{
+    ViewBag.Title = "ServiceAppliaceForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ServiceAppliance.Id == 0)
+{
+    <h2>Новий побутовий пристрій</h2>
+}
+else
+{
+    <h2>Редагування побутового пристроя (id: @Model.ServiceAppliance.Id)</h2>
+}
+
+@using (Html.BeginForm("Save", "ServiceAppliances"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(a => a.ServiceAppliance.Model)
+        @Html.TextBoxFor(a => a.ServiceAppliance.Model, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.ServiceAppliance.Model)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(a => a.ServiceAppliance.BrandId)
+        @Html.DropDownListFor(a => a.ServiceAppliance.BrandId, new SelectList(Model.Brands, "Id", "Title"), "Оберіть бренд пристрою", new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.ServiceAppliance.BrandId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(a => a.ServiceAppliance.DevicetypeId)
+        @Html.DropDownListFor(a => a.ServiceAppliance.DevicetypeId, new SelectList(Model.DeviceTypes, "Id", "Title"), "Оберіть тип пристрою", new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.ServiceAppliance.DevicetypeId)
+    </div>
+
+    @Html.HiddenFor(a => a.ServiceAppliance.Id)
+    @Html.AntiForgeryToken()
+
+    if (Model.ServiceAppliance.Id == 0)
+    {
+        <button type="submit" class="btn btn-success">Створити</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Зберігти</button>
+    }
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
