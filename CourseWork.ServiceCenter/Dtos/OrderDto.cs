@@ -1,11 +1,11 @@
+﻿using CourseWork.ServiceCenter.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseWork.ServiceCenter.Models
+namespace CourseWork.ServiceCenter.Dtos
 {
-    [Table("Order")]
-    public class Order
+    public class OrderDto
     {
         public int Id { get; set; }
 

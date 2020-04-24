@@ -19,6 +19,7 @@ namespace CourseWork.ServiceCenter
         public DbSet<DeviceType> DeviceTypes { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<PartCategory> PartCategories { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

@@ -40,6 +40,9 @@ namespace CourseWork.ServiceCenter.App_Start
 
             Mapper.CreateMap<ServiceAppliance, ServiceApplianceDto>();
             Mapper.CreateMap<ServiceApplianceDto, ServiceAppliance>();
+
+            Mapper.CreateMap<Order, OrderDto>();
+            Mapper.CreateMap<OrderDto, Order>();
         }
     }
 }

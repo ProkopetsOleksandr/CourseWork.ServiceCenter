@@ -1,5 +1,64 @@
 ﻿$(document).ready(function () {
 
+    var ordersTable = $('#orders').DataTable({
+        ajax: {
+            url: "/api/orders",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "orderNumber"
+            },
+            {
+                data: "orderDate",
+                render: function (data) {
+                    return data.substr(0, 10);
+                }
+            },
+            {
+                data: "customer.name"
+            },
+            {
+                data: "serviceAppliance.model"
+            },
+            {
+                data: "orderDone",
+                render: function (data) {
+                    if (data != null)
+                        return "Так";
+                    else
+                        return "Ні";
+                }
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/orders/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/orders/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
+                        "<a href='/orders/delete/" + data + "' class='btn-link js-delete' data-order-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#orders").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити це замовлення?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/orders/" + button.attr("data-order-id"),
+                    method: "DELETE",
+                    success: function () {
+                        ordersTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
     var appliancesTable = $('#service-appliance').DataTable({
         ajax: {
             url: "/api/serviceAppliances",

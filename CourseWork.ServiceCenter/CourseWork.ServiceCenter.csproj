@@ -191,6 +191,7 @@
     <Compile Include="Controllers\API\DeviceTypesController.cs" />
     <Compile Include="Controllers\API\EmployeePositionsController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
+    <Compile Include="Controllers\API\OrdersController.cs" />
     <Compile Include="Controllers\API\PartCategoriesController.cs" />
     <Compile Include="Controllers\API\PartsController.cs" />
     <Compile Include="Controllers\API\ServiceAppliancesController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PartCategoriesController.cs" />
     <Compile Include="Controllers\PartsController.cs" />
     <Compile Include="Controllers\ServiceAppliancesController.cs" />
@@ -213,6 +215,7 @@
     <Compile Include="Dtos\DeviceTypeDto.cs" />
     <Compile Include="Dtos\EmployeeDto.cs" />
     <Compile Include="Dtos\EmployeePositionDto.cs" />
+    <Compile Include="Dtos\OrderDto.cs" />
     <Compile Include="Dtos\PartCategoryDto.cs" />
     <Compile Include="Dtos\PartDto.cs" />
     <Compile Include="Dtos\ServiceApplianceDto.cs" />
@@ -247,6 +250,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CityFormViewModel.cs" />
     <Compile Include="ViewModels\EmployeeFormViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewViewModel.cs" />
     <Compile Include="ViewModels\PartFormViewModel.cs" />
     <Compile Include="ViewModels\ServiceApplianceViewModel.cs" />
   </ItemGroup>
@@ -333,6 +337,8 @@
     <Content Include="Views\Parts\View.cshtml" />
     <Content Include="Views\ServiceAppliances\Index.cshtml" />
     <Content Include="Views\ServiceAppliances\ServiceApplianceForm.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
