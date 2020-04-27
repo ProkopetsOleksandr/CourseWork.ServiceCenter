@@ -23,6 +23,7 @@ namespace CourseWork.ServiceCenter
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                       "~/Scripts/jquery-{version}.js",
                       "~/Scripts/bootbox.js",
+                      "~/Scripts/typeahead.bundle.js",
                       "~/Scripts/main.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/dataTable").Include(
@@ -33,6 +34,7 @@ namespace CourseWork.ServiceCenter
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/layout.css",
                       "~/Content/DataTables/dataTables.bootstrap4.css",
+                      "~/Content/typeahead.css",
                       "~/Content/main.css"
                       ));
         }

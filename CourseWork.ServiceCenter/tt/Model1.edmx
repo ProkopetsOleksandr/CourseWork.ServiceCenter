@@ -1,0 +1,1331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CourseWorkModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="employeePositionId" Type="int" Nullable="false" />
+          <Property Name="serviceCenterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeePosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderNumber" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="orderDate" Type="date" Nullable="false" />
+          <Property Name="totalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="description" Type="nvarchar" MaxLength="300" />
+          <Property Name="orderDone" Type="date" />
+          <Property Name="employeeId" Type="int" Nullable="false" />
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="serviceApplianceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderFulfillment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateStart" Type="date" Nullable="false" />
+          <Property Name="dateDone" Type="date" />
+          <Property Name="orderServiceId" Type="int" Nullable="false" />
+          <Property Name="employeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="totalServicePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="orderId" Type="int" Nullable="false" />
+          <Property Name="servicetypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="model" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="warrantyPeriod" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="partCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="partCategoryId" Type="int" Nullable="false" />
+          <Property Name="brandId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PartCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PartInServiceCenter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="serviceCenterId" Type="int" Nullable="false" />
+          <Property Name="partId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceAppliance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="model" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="brandId" Type="int" Nullable="false" />
+          <Property Name="devicetypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceCenter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="centerNumber" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="cityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceCenterBrand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brandId" Type="int" Nullable="false" />
+          <Property Name="serviceCenterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceCenterDeviceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceCenterId" Type="int" Nullable="false" />
+          <Property Name="deviceTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="partInServiceCenterId" Type="int" Nullable="false" />
+          <Property Name="orderServiceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employee__employ__3C69FB99">
+          <End Role="EmployeePosition" Type="Self.EmployeePosition" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePosition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="employeePositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__servic__3D5E1FD2">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__customerI__44FF419A">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__employeeI__440B1D61">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__serviceAp__45F365D3">
+          <End Role="ServiceAppliance" Type="Self.ServiceAppliance" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceAppliance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="serviceApplianceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFulf__emplo__4D94879B">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="OrderFulfillment" Type="Self.OrderFulfillment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderFulfillment">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFulf__order__4CA06362">
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="1" />
+          <End Role="OrderFulfillment" Type="Self.OrderFulfillment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderFulfillment">
+              <PropertyRef Name="orderServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderServ__order__48CFD27E">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderServ__servi__49C3F6B7">
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="servicetypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__brandId__5165187F">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__partCatego__5070F446">
+          <End Role="PartCategory" Type="Self.PartCategory" Multiplicity="1" />
+          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="partCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PartInSer__partI__5535A963">
+          <End Role="Part" Type="Self.Part" Multiplicity="1" />
+          <End Role="PartInServiceCenter" Type="Self.PartInServiceCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartInServiceCenter">
+              <PropertyRef Name="partId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PartInSer__servi__5441852A">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="PartInServiceCenter" Type="Self.PartInServiceCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartInServiceCenter">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceAp__brand__403A8C7D">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="ServiceAppliance" Type="Self.ServiceAppliance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceAppliance">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceAp__devic__412EB0B6">
+          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
+          <End Role="ServiceAppliance" Type="Self.ServiceAppliance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceAppliance">
+              <PropertyRef Name="devicetypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__brand__5812160E">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="ServiceCenterBrand" Type="Self.ServiceCenterBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterBrand">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__cityI__398D8EEE">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenter">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__devic__5CD6CB2B">
+          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
+          <End Role="ServiceCenterDeviceType" Type="Self.ServiceCenterDeviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterDeviceType">
+              <PropertyRef Name="deviceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__servi__59063A47">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="ServiceCenterBrand" Type="Self.ServiceCenterBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterBrand">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__servi__5BE2A6F2">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="ServiceCenterDeviceType" Type="Self.ServiceCenterDeviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterDeviceType">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceDe__order__60A75C0F">
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="1" />
+          <End Role="ServiceDetails" Type="Self.ServiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceDetails">
+              <PropertyRef Name="orderServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceDe__partI__5FB337D6">
+          <End Role="PartInServiceCenter" Type="Self.PartInServiceCenter" Multiplicity="1" />
+          <End Role="ServiceDetails" Type="Self.ServiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartInServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceDetails">
+              <PropertyRef Name="partInServiceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CourseWorkModelContainer">
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceType" EntityType="Self.DeviceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeePosition" EntityType="Self.EmployeePosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderFulfillment" EntityType="Self.OrderFulfillment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderService" EntityType="Self.OrderService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Part" EntityType="Self.Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartCategory" EntityType="Self.PartCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartInServiceCenter" EntityType="Self.PartInServiceCenter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceAppliance" EntityType="Self.ServiceAppliance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceCenter" EntityType="Self.ServiceCenter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceCenterBrand" EntityType="Self.ServiceCenterBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceCenterDeviceType" EntityType="Self.ServiceCenterDeviceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceDetails" EntityType="Self.ServiceDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceType" EntityType="Self.ServiceType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employee__employ__3C69FB99" Association="Self.FK__Employee__employ__3C69FB99">
+            <End Role="EmployeePosition" EntitySet="EmployeePosition" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__servic__3D5E1FD2" Association="Self.FK__Employee__servic__3D5E1FD2">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__customerI__44FF419A" Association="Self.FK__Order__customerI__44FF419A">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__employeeI__440B1D61" Association="Self.FK__Order__employeeI__440B1D61">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__serviceAp__45F365D3" Association="Self.FK__Order__serviceAp__45F365D3">
+            <End Role="ServiceAppliance" EntitySet="ServiceAppliance" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFulf__emplo__4D94879B" Association="Self.FK__OrderFulf__emplo__4D94879B">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderFulfillment" EntitySet="OrderFulfillment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFulf__order__4CA06362" Association="Self.FK__OrderFulf__order__4CA06362">
+            <End Role="OrderService" EntitySet="OrderService" />
+            <End Role="OrderFulfillment" EntitySet="OrderFulfillment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderServ__order__48CFD27E" Association="Self.FK__OrderServ__order__48CFD27E">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderServ__servi__49C3F6B7" Association="Self.FK__OrderServ__servi__49C3F6B7">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__brandId__5165187F" Association="Self.FK__Part__brandId__5165187F">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__partCatego__5070F446" Association="Self.FK__Part__partCatego__5070F446">
+            <End Role="PartCategory" EntitySet="PartCategory" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartInSer__partI__5535A963" Association="Self.FK__PartInSer__partI__5535A963">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="PartInServiceCenter" EntitySet="PartInServiceCenter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartInSer__servi__5441852A" Association="Self.FK__PartInSer__servi__5441852A">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="PartInServiceCenter" EntitySet="PartInServiceCenter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceAp__brand__403A8C7D" Association="Self.FK__ServiceAp__brand__403A8C7D">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="ServiceAppliance" EntitySet="ServiceAppliance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceAp__devic__412EB0B6" Association="Self.FK__ServiceAp__devic__412EB0B6">
+            <End Role="DeviceType" EntitySet="DeviceType" />
+            <End Role="ServiceAppliance" EntitySet="ServiceAppliance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__brand__5812160E" Association="Self.FK__ServiceCe__brand__5812160E">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="ServiceCenterBrand" EntitySet="ServiceCenterBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__cityI__398D8EEE" Association="Self.FK__ServiceCe__cityI__398D8EEE">
+            <End Role="City" EntitySet="City" />
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__devic__5CD6CB2B" Association="Self.FK__ServiceCe__devic__5CD6CB2B">
+            <End Role="DeviceType" EntitySet="DeviceType" />
+            <End Role="ServiceCenterDeviceType" EntitySet="ServiceCenterDeviceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__servi__59063A47" Association="Self.FK__ServiceCe__servi__59063A47">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="ServiceCenterBrand" EntitySet="ServiceCenterBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__servi__5BE2A6F2" Association="Self.FK__ServiceCe__servi__5BE2A6F2">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="ServiceCenterDeviceType" EntitySet="ServiceCenterDeviceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceDe__order__60A75C0F" Association="Self.FK__ServiceDe__order__60A75C0F">
+            <End Role="OrderService" EntitySet="OrderService" />
+            <End Role="ServiceDetails" EntitySet="ServiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceDe__partI__5FB337D6" Association="Self.FK__ServiceDe__partI__5FB337D6">
+            <End Role="PartInServiceCenter" EntitySet="PartInServiceCenter" />
+            <End Role="ServiceDetails" EntitySet="ServiceDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CourseWorkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="Self.FK__Part__brandId__5165187F" FromRole="Brand" ToRole="Part" />
+          <NavigationProperty Name="ServiceAppliance" Relationship="Self.FK__ServiceAp__brand__403A8C7D" FromRole="Brand" ToRole="ServiceAppliance" />
+          <NavigationProperty Name="ServiceCenterBrand" Relationship="Self.FK__ServiceCe__brand__5812160E" FromRole="Brand" ToRole="ServiceCenterBrand" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ServiceCenter" Relationship="Self.FK__ServiceCe__cityI__398D8EEE" FromRole="City" ToRole="ServiceCenter" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__customerI__44FF419A" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ServiceAppliance" Relationship="Self.FK__ServiceAp__devic__412EB0B6" FromRole="DeviceType" ToRole="ServiceAppliance" />
+          <NavigationProperty Name="ServiceCenterDeviceType" Relationship="Self.FK__ServiceCe__devic__5CD6CB2B" FromRole="DeviceType" ToRole="ServiceCenterDeviceType" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="employeePositionId" Type="Int32" Nullable="false" />
+          <Property Name="serviceCenterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmployeePosition" Relationship="Self.FK__Employee__employ__3C69FB99" FromRole="Employee" ToRole="EmployeePosition" />
+          <NavigationProperty Name="ServiceCenter" Relationship="Self.FK__Employee__servic__3D5E1FD2" FromRole="Employee" ToRole="ServiceCenter" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__employeeI__440B1D61" FromRole="Employee" ToRole="Order" />
+          <NavigationProperty Name="OrderFulfillment" Relationship="Self.FK__OrderFulf__emplo__4D94879B" FromRole="Employee" ToRole="OrderFulfillment" />
+        </EntityType>
+        <EntityType Name="EmployeePosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__employ__3C69FB99" FromRole="EmployeePosition" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="totalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="orderDone" Type="DateTime" Precision="0" />
+          <Property Name="employeeId" Type="Int32" Nullable="false" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="serviceApplianceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Order__customerI__44FF419A" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Order__employeeI__440B1D61" FromRole="Order" ToRole="Employee" />
+          <NavigationProperty Name="ServiceAppliance" Relationship="Self.FK__Order__serviceAp__45F365D3" FromRole="Order" ToRole="ServiceAppliance" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrderServ__order__48CFD27E" FromRole="Order" ToRole="OrderService" />
+        </EntityType>
+        <EntityType Name="OrderFulfillment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateDone" Type="DateTime" Precision="0" />
+          <Property Name="orderServiceId" Type="Int32" Nullable="false" />
+          <Property Name="employeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__OrderFulf__emplo__4D94879B" FromRole="OrderFulfillment" ToRole="Employee" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrderFulf__order__4CA06362" FromRole="OrderFulfillment" ToRole="OrderService" />
+        </EntityType>
+        <EntityType Name="OrderService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="totalServicePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="orderId" Type="Int32" Nullable="false" />
+          <Property Name="servicetypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__OrderServ__order__48CFD27E" FromRole="OrderService" ToRole="Order" />
+          <NavigationProperty Name="OrderFulfillment" Relationship="Self.FK__OrderFulf__order__4CA06362" FromRole="OrderService" ToRole="OrderFulfillment" />
+          <NavigationProperty Name="ServiceType" Relationship="Self.FK__OrderServ__servi__49C3F6B7" FromRole="OrderService" ToRole="ServiceType" />
+          <NavigationProperty Name="ServiceDetails" Relationship="Self.FK__ServiceDe__order__60A75C0F" FromRole="OrderService" ToRole="ServiceDetails" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="model" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="warrantyPeriod" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="partCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="partCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="brandId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK__Part__brandId__5165187F" FromRole="Part" ToRole="Brand" />
+          <NavigationProperty Name="PartCategory" Relationship="Self.FK__Part__partCatego__5070F446" FromRole="Part" ToRole="PartCategory" />
+          <NavigationProperty Name="PartInServiceCenter" Relationship="Self.FK__PartInSer__partI__5535A963" FromRole="Part" ToRole="PartInServiceCenter" />
+        </EntityType>
+        <EntityType Name="PartCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="Self.FK__Part__partCatego__5070F446" FromRole="PartCategory" ToRole="Part" />
+        </EntityType>
+        <EntityType Name="PartInServiceCenter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="serviceCenterId" Type="Int32" Nullable="false" />
+          <Property Name="partId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Part" Relationship="Self.FK__PartInSer__partI__5535A963" FromRole="PartInServiceCenter" ToRole="Part" />
+          <NavigationProperty Name="ServiceCenter" Relationship="Self.FK__PartInSer__servi__5441852A" FromRole="PartInServiceCenter" ToRole="ServiceCenter" />
+          <NavigationProperty Name="ServiceDetails" Relationship="Self.FK__ServiceDe__partI__5FB337D6" FromRole="PartInServiceCenter" ToRole="ServiceDetails" />
+        </EntityType>
+        <EntityType Name="ServiceAppliance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="model" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="brandId" Type="Int32" Nullable="false" />
+          <Property Name="devicetypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK__ServiceAp__brand__403A8C7D" FromRole="ServiceAppliance" ToRole="Brand" />
+          <NavigationProperty Name="DeviceType" Relationship="Self.FK__ServiceAp__devic__412EB0B6" FromRole="ServiceAppliance" ToRole="DeviceType" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order__serviceAp__45F365D3" FromRole="ServiceAppliance" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="ServiceCenter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="centerNumber" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="cityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK__ServiceCe__cityI__398D8EEE" FromRole="ServiceCenter" ToRole="City" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__servic__3D5E1FD2" FromRole="ServiceCenter" ToRole="Employee" />
+          <NavigationProperty Name="PartInServiceCenter" Relationship="Self.FK__PartInSer__servi__5441852A" FromRole="ServiceCenter" ToRole="PartInServiceCenter" />
+          <NavigationProperty Name="ServiceCenterBrand" Relationship="Self.FK__ServiceCe__servi__59063A47" FromRole="ServiceCenter" ToRole="ServiceCenterBrand" />
+          <NavigationProperty Name="ServiceCenterDeviceType" Relationship="Self.FK__ServiceCe__servi__5BE2A6F2" FromRole="ServiceCenter" ToRole="ServiceCenterDeviceType" />
+        </EntityType>
+        <EntityType Name="ServiceCenterBrand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brandId" Type="Int32" Nullable="false" />
+          <Property Name="serviceCenterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK__ServiceCe__brand__5812160E" FromRole="ServiceCenterBrand" ToRole="Brand" />
+          <NavigationProperty Name="ServiceCenter" Relationship="Self.FK__ServiceCe__servi__59063A47" FromRole="ServiceCenterBrand" ToRole="ServiceCenter" />
+        </EntityType>
+        <EntityType Name="ServiceCenterDeviceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceCenterId" Type="Int32" Nullable="false" />
+          <Property Name="deviceTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DeviceType" Relationship="Self.FK__ServiceCe__devic__5CD6CB2B" FromRole="ServiceCenterDeviceType" ToRole="DeviceType" />
+          <NavigationProperty Name="ServiceCenter" Relationship="Self.FK__ServiceCe__servi__5BE2A6F2" FromRole="ServiceCenterDeviceType" ToRole="ServiceCenter" />
+        </EntityType>
+        <EntityType Name="ServiceDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="partInServiceCenterId" Type="Int32" Nullable="false" />
+          <Property Name="orderServiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__ServiceDe__order__60A75C0F" FromRole="ServiceDetails" ToRole="OrderService" />
+          <NavigationProperty Name="PartInServiceCenter" Relationship="Self.FK__ServiceDe__partI__5FB337D6" FromRole="ServiceDetails" ToRole="PartInServiceCenter" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="OrderService" Relationship="Self.FK__OrderServ__servi__49C3F6B7" FromRole="ServiceType" ToRole="OrderService" />
+        </EntityType>
+        <Association Name="FK__Part__brandId__5165187F">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceAp__brand__403A8C7D">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="ServiceAppliance" Type="Self.ServiceAppliance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceAppliance">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__brand__5812160E">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="ServiceCenterBrand" Type="Self.ServiceCenterBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterBrand">
+              <PropertyRef Name="brandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__cityI__398D8EEE">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenter">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__customerI__44FF419A">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceAp__devic__412EB0B6">
+          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
+          <End Role="ServiceAppliance" Type="Self.ServiceAppliance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceAppliance">
+              <PropertyRef Name="devicetypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__devic__5CD6CB2B">
+          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
+          <End Role="ServiceCenterDeviceType" Type="Self.ServiceCenterDeviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterDeviceType">
+              <PropertyRef Name="deviceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__employ__3C69FB99">
+          <End Role="EmployeePosition" Type="Self.EmployeePosition" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePosition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="employeePositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__servic__3D5E1FD2">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__employeeI__440B1D61">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFulf__emplo__4D94879B">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="OrderFulfillment" Type="Self.OrderFulfillment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderFulfillment">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__serviceAp__45F365D3">
+          <End Role="ServiceAppliance" Type="Self.ServiceAppliance" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceAppliance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="serviceApplianceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderServ__order__48CFD27E">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderFulf__order__4CA06362">
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="1" />
+          <End Role="OrderFulfillment" Type="Self.OrderFulfillment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderFulfillment">
+              <PropertyRef Name="orderServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderServ__servi__49C3F6B7">
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderService">
+              <PropertyRef Name="servicetypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceDe__order__60A75C0F">
+          <End Role="OrderService" Type="Self.OrderService" Multiplicity="1" />
+          <End Role="ServiceDetails" Type="Self.ServiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderService">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceDetails">
+              <PropertyRef Name="orderServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Part__partCatego__5070F446">
+          <End Role="PartCategory" Type="Self.PartCategory" Multiplicity="1" />
+          <End Role="Part" Type="Self.Part" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Part">
+              <PropertyRef Name="partCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PartInSer__partI__5535A963">
+          <End Role="Part" Type="Self.Part" Multiplicity="1" />
+          <End Role="PartInServiceCenter" Type="Self.PartInServiceCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartInServiceCenter">
+              <PropertyRef Name="partId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PartInSer__servi__5441852A">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="PartInServiceCenter" Type="Self.PartInServiceCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PartInServiceCenter">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceDe__partI__5FB337D6">
+          <End Role="PartInServiceCenter" Type="Self.PartInServiceCenter" Multiplicity="1" />
+          <End Role="ServiceDetails" Type="Self.ServiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartInServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceDetails">
+              <PropertyRef Name="partInServiceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__servi__59063A47">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="ServiceCenterBrand" Type="Self.ServiceCenterBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterBrand">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCe__servi__5BE2A6F2">
+          <End Role="ServiceCenter" Type="Self.ServiceCenter" Multiplicity="1" />
+          <End Role="ServiceCenterDeviceType" Type="Self.ServiceCenterDeviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCenter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceCenterDeviceType">
+              <PropertyRef Name="serviceCenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="DeviceType" EntityType="Self.DeviceType" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeePosition" EntityType="Self.EmployeePosition" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderFulfillment" EntityType="Self.OrderFulfillment" />
+          <EntitySet Name="OrderService" EntityType="Self.OrderService" />
+          <EntitySet Name="Part" EntityType="Self.Part" />
+          <EntitySet Name="PartCategory" EntityType="Self.PartCategory" />
+          <EntitySet Name="PartInServiceCenter" EntityType="Self.PartInServiceCenter" />
+          <EntitySet Name="ServiceAppliance" EntityType="Self.ServiceAppliance" />
+          <EntitySet Name="ServiceCenter" EntityType="Self.ServiceCenter" />
+          <EntitySet Name="ServiceCenterBrand" EntityType="Self.ServiceCenterBrand" />
+          <EntitySet Name="ServiceCenterDeviceType" EntityType="Self.ServiceCenterDeviceType" />
+          <EntitySet Name="ServiceDetails" EntityType="Self.ServiceDetails" />
+          <EntitySet Name="ServiceType" EntityType="Self.ServiceType" />
+          <AssociationSet Name="FK__Part__brandId__5165187F" Association="Self.FK__Part__brandId__5165187F">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceAp__brand__403A8C7D" Association="Self.FK__ServiceAp__brand__403A8C7D">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="ServiceAppliance" EntitySet="ServiceAppliance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__brand__5812160E" Association="Self.FK__ServiceCe__brand__5812160E">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="ServiceCenterBrand" EntitySet="ServiceCenterBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__cityI__398D8EEE" Association="Self.FK__ServiceCe__cityI__398D8EEE">
+            <End Role="City" EntitySet="City" />
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__customerI__44FF419A" Association="Self.FK__Order__customerI__44FF419A">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceAp__devic__412EB0B6" Association="Self.FK__ServiceAp__devic__412EB0B6">
+            <End Role="DeviceType" EntitySet="DeviceType" />
+            <End Role="ServiceAppliance" EntitySet="ServiceAppliance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__devic__5CD6CB2B" Association="Self.FK__ServiceCe__devic__5CD6CB2B">
+            <End Role="DeviceType" EntitySet="DeviceType" />
+            <End Role="ServiceCenterDeviceType" EntitySet="ServiceCenterDeviceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__employ__3C69FB99" Association="Self.FK__Employee__employ__3C69FB99">
+            <End Role="EmployeePosition" EntitySet="EmployeePosition" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__servic__3D5E1FD2" Association="Self.FK__Employee__servic__3D5E1FD2">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__employeeI__440B1D61" Association="Self.FK__Order__employeeI__440B1D61">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFulf__emplo__4D94879B" Association="Self.FK__OrderFulf__emplo__4D94879B">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderFulfillment" EntitySet="OrderFulfillment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__serviceAp__45F365D3" Association="Self.FK__Order__serviceAp__45F365D3">
+            <End Role="ServiceAppliance" EntitySet="ServiceAppliance" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderServ__order__48CFD27E" Association="Self.FK__OrderServ__order__48CFD27E">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderFulf__order__4CA06362" Association="Self.FK__OrderFulf__order__4CA06362">
+            <End Role="OrderService" EntitySet="OrderService" />
+            <End Role="OrderFulfillment" EntitySet="OrderFulfillment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderServ__servi__49C3F6B7" Association="Self.FK__OrderServ__servi__49C3F6B7">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="OrderService" EntitySet="OrderService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceDe__order__60A75C0F" Association="Self.FK__ServiceDe__order__60A75C0F">
+            <End Role="OrderService" EntitySet="OrderService" />
+            <End Role="ServiceDetails" EntitySet="ServiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Part__partCatego__5070F446" Association="Self.FK__Part__partCatego__5070F446">
+            <End Role="PartCategory" EntitySet="PartCategory" />
+            <End Role="Part" EntitySet="Part" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartInSer__partI__5535A963" Association="Self.FK__PartInSer__partI__5535A963">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="PartInServiceCenter" EntitySet="PartInServiceCenter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PartInSer__servi__5441852A" Association="Self.FK__PartInSer__servi__5441852A">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="PartInServiceCenter" EntitySet="PartInServiceCenter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceDe__partI__5FB337D6" Association="Self.FK__ServiceDe__partI__5FB337D6">
+            <End Role="PartInServiceCenter" EntitySet="PartInServiceCenter" />
+            <End Role="ServiceDetails" EntitySet="ServiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__servi__59063A47" Association="Self.FK__ServiceCe__servi__59063A47">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="ServiceCenterBrand" EntitySet="ServiceCenterBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCe__servi__5BE2A6F2" Association="Self.FK__ServiceCe__servi__5BE2A6F2">
+            <End Role="ServiceCenter" EntitySet="ServiceCenter" />
+            <End Role="ServiceCenterDeviceType" EntitySet="ServiceCenterDeviceType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CourseWorkModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="CourseWorkModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="CourseWorkModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="CourseWorkModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceType">
+            <EntityTypeMapping TypeName="CourseWorkModel.DeviceType">
+              <MappingFragment StoreEntitySet="DeviceType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="CourseWorkModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="employeePositionId" ColumnName="employeePositionId" />
+                <ScalarProperty Name="serviceCenterId" ColumnName="serviceCenterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePosition">
+            <EntityTypeMapping TypeName="CourseWorkModel.EmployeePosition">
+              <MappingFragment StoreEntitySet="EmployeePosition">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="CourseWorkModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="orderDone" ColumnName="orderDone" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="serviceApplianceId" ColumnName="serviceApplianceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderFulfillment">
+            <EntityTypeMapping TypeName="CourseWorkModel.OrderFulfillment">
+              <MappingFragment StoreEntitySet="OrderFulfillment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+                <ScalarProperty Name="dateDone" ColumnName="dateDone" />
+                <ScalarProperty Name="orderServiceId" ColumnName="orderServiceId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderService">
+            <EntityTypeMapping TypeName="CourseWorkModel.OrderService">
+              <MappingFragment StoreEntitySet="OrderService">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="totalServicePrice" ColumnName="totalServicePrice" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="servicetypeId" ColumnName="servicetypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Part">
+            <EntityTypeMapping TypeName="CourseWorkModel.Part">
+              <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="warrantyPeriod" ColumnName="warrantyPeriod" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="partCode" ColumnName="partCode" />
+                <ScalarProperty Name="partCategoryId" ColumnName="partCategoryId" />
+                <ScalarProperty Name="brandId" ColumnName="brandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartCategory">
+            <EntityTypeMapping TypeName="CourseWorkModel.PartCategory">
+              <MappingFragment StoreEntitySet="PartCategory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartInServiceCenter">
+            <EntityTypeMapping TypeName="CourseWorkModel.PartInServiceCenter">
+              <MappingFragment StoreEntitySet="PartInServiceCenter">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="serviceCenterId" ColumnName="serviceCenterId" />
+                <ScalarProperty Name="partId" ColumnName="partId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceAppliance">
+            <EntityTypeMapping TypeName="CourseWorkModel.ServiceAppliance">
+              <MappingFragment StoreEntitySet="ServiceAppliance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="brandId" ColumnName="brandId" />
+                <ScalarProperty Name="devicetypeId" ColumnName="devicetypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCenter">
+            <EntityTypeMapping TypeName="CourseWorkModel.ServiceCenter">
+              <MappingFragment StoreEntitySet="ServiceCenter">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="centerNumber" ColumnName="centerNumber" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="cityId" ColumnName="cityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCenterBrand">
+            <EntityTypeMapping TypeName="CourseWorkModel.ServiceCenterBrand">
+              <MappingFragment StoreEntitySet="ServiceCenterBrand">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="brandId" ColumnName="brandId" />
+                <ScalarProperty Name="serviceCenterId" ColumnName="serviceCenterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCenterDeviceType">
+            <EntityTypeMapping TypeName="CourseWorkModel.ServiceCenterDeviceType">
+              <MappingFragment StoreEntitySet="ServiceCenterDeviceType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="serviceCenterId" ColumnName="serviceCenterId" />
+                <ScalarProperty Name="deviceTypeId" ColumnName="deviceTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceDetails">
+            <EntityTypeMapping TypeName="CourseWorkModel.ServiceDetails">
+              <MappingFragment StoreEntitySet="ServiceDetails">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="partInServiceCenterId" ColumnName="partInServiceCenterId" />
+                <ScalarProperty Name="orderServiceId" ColumnName="orderServiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceType">
+            <EntityTypeMapping TypeName="CourseWorkModel.ServiceType">
+              <MappingFragment StoreEntitySet="ServiceType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

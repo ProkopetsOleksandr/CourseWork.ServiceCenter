@@ -1,0 +1,61 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.ServiceCenterViewModel
+@{
+    ViewBag.Title = "ServiceCenterForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ServiceCenter.Id == 0)
+{
+    <h2>Новий сервіс центр</h2>
+}
+else
+{
+    <h2>Редагування сервіс центру (id: @Model.ServiceCenter.Id)</h2>
+}
+
+@using (Html.BeginForm("Save", "ServiceCenters"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.ServiceCenter.CityId)
+        @Html.DropDownListFor(c => c.ServiceCenter.CityId, new SelectList(Model.Cities, "Id", "Title"), "Оберіть місто", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.ServiceCenter.CityId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.ServiceCenter.CenterNumber)
+        @Html.TextBoxFor(c => c.ServiceCenter.CenterNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.ServiceCenter.CenterNumber)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.ServiceCenter.Address)
+        @Html.TextBoxFor(c => c.ServiceCenter.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.ServiceCenter.Address)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.ServiceCenter.Phone)
+        @Html.TextBoxFor(c => c.ServiceCenter.Phone, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.ServiceCenter.Phone)
+    </div>
+
+    @Html.HiddenFor(a => a.ServiceCenter.Id)
+    @Html.AntiForgeryToken()
+
+    if (Model.ServiceCenter.Id == 0)
+    {
+        <button type="submit" class="btn btn-success">Створити</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Зберігти</button>
+    }
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

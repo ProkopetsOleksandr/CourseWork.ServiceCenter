@@ -1,5 +1,224 @@
 ﻿$(document).ready(function () {
 
+
+    /* Service center device types */
+    var serviceCenterBrandsTable = $('#deviceTypesInServiceCenter').DataTable({
+        ajax: {
+            url: "/api/ServiceCenterDeviceTypes",
+            data: { 'id': $('#centerTargetId').val() },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "deviceType.title"
+            }
+        ]
+    });
+    var deviceTypes = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/api/deviceTypes?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+    var deviceTypeId = 0
+    $('#deviceType').typeahead({
+        minLength: 2,
+        highlight: true
+    },
+        {
+            name: 'deviceTypes',
+            display: 'title',
+            source: deviceTypes
+        }).on("typeahead:select", function (e, deviceType) {
+            deviceTypeId = deviceType.id;
+        });
+    $('#addDeviceTypeToServiceCenter').on("click", function () {
+
+        var centerId = $('#centerTargetId').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/serviceCenterDeviceTypes",
+            data: { "serviceCenterId": centerId, "deviceTypeId": deviceTypeId },
+            success: function (response) {
+                $("#deviceTypesInServiceCenter").DataTable().ajax.reload();
+            }
+        });
+
+        deviceTypeId = 0;
+        $('#deviceType').typeahead("val", "");
+    });
+
+    /* Service center brands */
+    var serviceCenterBrandsTable = $('#brandsInServiceCenter').DataTable({
+        ajax: {
+            url: "/api/ServiceCenterBrands",
+            data: { 'id': $('#centerTargetId').val() },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "brand.title"
+            }
+        ]
+    });
+    var brands = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/api/brands?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+    var brandId = 0
+    $('#brand').typeahead({
+        minLength: 2,
+        highlight: true
+    },
+        {
+            name: 'brands',
+            display: 'title',
+            source: brands
+        }).on("typeahead:select", function (e, brand) {
+            brandId = brand.id;
+        });
+    $('#addBrandToServiceCenter').on("click", function () {
+
+        var centerId = $('#centerTargetId').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/serviceCenterBrands",
+            data: { "serviceCenterId": centerId, "brandId": brandId },
+            success: function (response) {
+                $("#brandsInServiceCenter").DataTable().ajax.reload();
+            }
+        });
+
+        brandId = 0;
+        $('#brand').typeahead("val", "");
+    });
+
+
+
+    /* Parts in service center */
+    var partsInServiceCenterTable = $('#partsInServiceCenter').DataTable({
+        ajax: {
+            url: "/api/PartsInServiceCenter/GetPartsInServiceCenter",
+            data: { 'id': $('#centerTargetId').val() },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "part.partCode"
+            },
+            {
+                data: "part.model",
+            },
+            {
+                data: "part.price"
+            },
+            {
+                data: "quantity"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/partInServiceCenter/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+
+    var parts = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('model'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/api/parts?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+    var partId = 0
+    $('#part').typeahead({
+        minLength: 2,
+        highlight: true
+    },
+        {
+        name: 'parts',
+        display: 'model',
+        source: parts
+    }).on("typeahead:select", function (e, part) {
+        partId = part.id;
+    });
+    $('#addPartToServiceCenter').on("click", function () {
+
+        var centerId = $('#centerTargetId').val();
+        var quantityVal = $('#quantity').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/partsInServiceCenter",
+            data: { "Quantity": quantityVal, "serviceCenterId": centerId, "partId": partId },
+            success: function (response) {
+                $("#partsInServiceCenter").DataTable().ajax.reload();
+            }
+        });
+
+        partId = 0;
+        $('#part').typeahead("val", "");
+    });
+
+    var serviceCentersTable = $('#service-centers').DataTable({
+        ajax: {
+            url: "/api/serviceCenters",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "centerNumber"
+            },
+            {
+                data: "city.title",
+            },
+            {
+                data: "address"
+            },
+            {
+                data: "phone"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/serviceCenters/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/serviceCenters/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
+                        "<a href='/serviceCenters/delete/" + data + "' class='btn-link js-delete' data-center-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+    $("#service-centers").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цей сервіс центр?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/serviceCenters/" + button.attr("data-center-id"),
+                    method: "DELETE",
+                    success: function () {
+                        serviceCentersTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
+    });
+
     var ordersTable = $('#orders').DataTable({
         ajax: {
             url: "/api/orders",

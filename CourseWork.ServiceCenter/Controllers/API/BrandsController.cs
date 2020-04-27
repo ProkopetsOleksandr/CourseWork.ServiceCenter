@@ -26,7 +26,7 @@ namespace CourseWork.ServiceCenter.Controllers.API
             var brandsQuery = _context.Brands.AsQueryable();
 
             if (!String.IsNullOrWhiteSpace(query))
-                brandsQuery.Where(b => b.Title.Contains(query));
+                brandsQuery = brandsQuery.Where(b => b.Title.Contains(query));
 
             var brandDtos = brandsQuery
                 .ToList()

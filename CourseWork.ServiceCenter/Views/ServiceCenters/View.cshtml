@@ -1,0 +1,163 @@
+﻿@model CourseWork.ServiceCenter.Models.ServiceCenter
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input id="centerTargetId" type="hidden" value=@Model.Id />
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        Інформація про сервіс-центр
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Код</td>
+                        <td>@Model.CenterNumber</td>
+                    </tr>
+                    <tr>
+                        <td>Місто</td>
+                        <td>@Model.City.Title</td>
+                    </tr>
+                    <tr>
+                        <td>Адреса</td>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td>Номер телефону</td>
+                        <td>@Model.Phone</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i> Наявні запчастини сервіс центру
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="partsInServiceCenter" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Код</th>
+                        <th>Модель</th>
+                        <th>Ціна</th>
+                        <th>Кількість</th>
+                        <th style="max-width: 150px;">Дії</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Код</th>
+                        <th>Модель</th>
+                        <th>Ціна</th>
+                        <th>Кількість</th>
+                        <th>Дії</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Додати запчастину
+</button>
+<div class="collapse" id="collapseExample">
+    <div class="well">
+        <input id="part" type="text" value="" />
+        <input id="quantity" type="number" min="1" value="" />
+        <button id="addPartToServiceCenter">Додати</button>
+    </div>
+</div>
+
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i> Бренди сервіс центру
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="brandsInServiceCenter" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Назва</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Назва</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseBrands" aria-expanded="false" aria-controls="collapseExample">
+    Додати бренд
+</button>
+<div class="collapse" id="collapseBrands">
+    <div class="well">
+        <input id="brand" type="text" value="" />
+        <button id="addBrandToServiceCenter">Додати</button>
+    </div>
+</div>
+
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i> Типи пристроїв в сервіс центру
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="deviceTypesInServiceCenter" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Назва</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Назва</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseTypes" aria-expanded="false" aria-controls="collapseExample">
+    Додати тип
+</button>
+<div class="collapse" id="collapseTypes">
+    <div class="well">
+        <input id="deviceType" type="text" value="" />
+        <button id="addDeviceTypeToServiceCenter">Додати</button>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+
+    <script>
+        $(document).ready(function () {
+
+
+
+        })
+    </script>
+}
+
+

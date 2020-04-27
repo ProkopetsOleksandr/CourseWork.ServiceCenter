@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CourseWork.ServiceCenter.Dtos;
 using CourseWork.ServiceCenter.Models;
+using System;
 using System.Linq;
 using System.Web.Http;
 
@@ -16,9 +17,14 @@ namespace CourseWork.ServiceCenter.Controllers.API
         }
 
         [HttpGet]
-        public IHttpActionResult GetDeviceTypes()
+        public IHttpActionResult GetDeviceTypes(string query = null)
         {
-            var deviceTypeDtos = _context.DeviceTypes.ToList().Select(Mapper.Map<DeviceType, DeviceTypeDto>);
+            var deviceTypeQuery = _context.DeviceTypes.AsQueryable();
+
+            if (!String.IsNullOrWhiteSpace(query))
+                deviceTypeQuery = deviceTypeQuery.Where(t => t.Title.Contains(query));
+
+            var deviceTypeDtos =  deviceTypeQuery.ToList().Select(Mapper.Map<DeviceType, DeviceTypeDto>);
             return Ok(deviceTypeDtos);
         }
 

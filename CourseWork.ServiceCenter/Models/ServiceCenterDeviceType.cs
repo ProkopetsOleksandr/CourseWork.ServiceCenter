@@ -1,22 +1,19 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CourseWork.ServiceCenter.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ServiceCenterDeviceType")]
-    public partial class ServiceCenterDeviceType
+    public class ServiceCenterDeviceType
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public int serviceCenterId { get; set; }
+        public int ServiceCenterId { get; set; }
 
-        public int deviceTypeId { get; set; }
+        public int DeviceTypeId { get; set; }
 
-        public virtual DeviceType DeviceType { get; set; }
+        public DeviceType DeviceType { get; set; }
 
-        public virtual ServiceCenter ServiceCenter { get; set; }
+        public ServiceCenter ServiceCenter { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using CourseWork.ServiceCenter.Models;
 using System.Linq;
 using System.Web.Http;
 using System.Data.Entity;
+using System;
 
 namespace CourseWork.ServiceCenter.Controllers.API
 {
@@ -17,11 +18,16 @@ namespace CourseWork.ServiceCenter.Controllers.API
         }
 
         [HttpGet]
-        public IHttpActionResult GetParts()
+        public IHttpActionResult GetParts(string query = null)
         {
-            var partsDtos = _context.Parts
+            var partsQuery = _context.Parts
                 .Include(p => p.Brand)
-                .Include(p => p.PartCategory)
+                .Include(p => p.PartCategory);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                partsQuery = partsQuery.Where(p => p.Model.Contains(query));
+                
+            var partsDtos  = partsQuery
                 .ToList()
                 .Select(Mapper.Map<Part, PartDto>);
 
