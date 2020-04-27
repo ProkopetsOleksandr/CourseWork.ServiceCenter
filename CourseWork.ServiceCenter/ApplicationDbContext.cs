@@ -22,6 +22,9 @@ namespace CourseWork.ServiceCenter
         public DbSet<Order> Orders { get; set; }
         public DbSet<PartInServiceCenter> PartsInServiceCenters { get; set; }
         public DbSet<ServiceCenterDeviceType> ServiceCenterDeviceTypes { get; set; }
+        public DbSet<OrderService> OrderServices { get; set; }
+        public DbSet<OrderFulfillment> OrderFulfillments { get; set; }
+        public DbSet<ServiceDetails> ServiceDetails { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

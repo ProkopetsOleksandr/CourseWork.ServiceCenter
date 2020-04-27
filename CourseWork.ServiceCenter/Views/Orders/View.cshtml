@@ -9,6 +9,9 @@
         Інформація про замовлення
     </div>
     <div class="card-body">
+
+        <input id="orderId" type="hidden" value="@Model.Order.Id" />
+
         <div class="table-responsive mb-5">
             <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                 <tbody>
@@ -53,28 +56,41 @@
             </table>
         </div>
 
-        <h5>Сервіси замовлення:</h5>
 
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Номер</th>
-                        <th>Номер телефону</th>
-                        <th>Адреса</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @*@foreach (var center in Model.ServiceCenters)
-                    {
-                        <tr>
-                            <td><a href="/serviceCenter/@center.Id">@center.CenterNumber</a></td>
-                            <td>@center.Phone</td>
-                            <td>@center.Address</td>
-                        </tr>
-                    }*@
-                </tbody>
-            </table>
+        <div class="card mb-4 mt-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i> Сервіси замовлення
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="order-services" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Сервіс</th>
+                                <th>Ціна</th>
+                                <th style="max-width: 150px;">Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Сервіс</th>
+                                <th>Ціна</th>
+                                <th>Дії</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
+
+
+
     </div>
 </div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+}

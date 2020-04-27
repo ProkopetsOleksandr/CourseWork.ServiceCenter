@@ -1,0 +1,78 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.OrderServicesViewModel
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <a href="/orders/view/@Model.OrderService.OrderId" class="btn btn-primary mt-4">Повернутись до замовлення</a>
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        Інформація про сервіс замовлення
+    </div>
+    <div class="card-body">
+        <div class="table-responsive mb-3">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Сервіс</td>
+                        <td>@Model.OrderService.ServiceType.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Ціна сервісу</td>
+                        <td>@Model.OrderService.ServiceType.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Загальна ціна</td>
+                        <td>@Model.OrderService.TotalServicePrice</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h5>Виконання сервісу</h5>
+
+        <div class="table-responsive mb-3">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Виконавець</td>
+                        <td>@Model.OrderFulfillment.Employee.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Дата початку</td>
+                        <td>@Model.OrderFulfillment.DateStart.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>Дата завершення</td>
+                        <td>@Model.OrderFulfillment.DateDone</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <h5>Використані запчастини</h5>
+
+        @if (Model.ServiceDetails.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                    <tbody>
+
+                        @foreach (var detail in Model.ServiceDetails)
+                        {
+                            <tr>
+                                <td>@detail.PartInServiceCenter.Part.Model</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Жодних запчастин в цьому сервісі</p>
+        }
+    </div>
+</div>

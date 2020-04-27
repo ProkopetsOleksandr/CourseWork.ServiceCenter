@@ -52,6 +52,15 @@ namespace CourseWork.ServiceCenter.App_Start
 
             Mapper.CreateMap<ServiceCenterDeviceType, ServiceCenterDeviceTypeDto>();
             Mapper.CreateMap<ServiceCenterDeviceTypeDto, ServiceCenterDeviceType>();
+
+            Mapper.CreateMap<OrderService, OrderServiceDto>();
+            Mapper.CreateMap<OrderServiceDto, OrderService>();
+
+            Mapper.CreateMap<OrderFulfillment, OrderFulfillmentDto>();
+            Mapper.CreateMap<OrderFulfillmentDto, OrderFulfillment>();
+
+            Mapper.CreateMap<ServiceDetails, ServiceDetailsDto>();
+            Mapper.CreateMap<ServiceDetailsDto, ServiceDetails>();
         }
     }
 }

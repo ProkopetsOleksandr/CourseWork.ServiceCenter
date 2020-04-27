@@ -192,6 +192,7 @@
     <Compile Include="Controllers\API\EmployeePositionsController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
     <Compile Include="Controllers\API\OrdersController.cs" />
+    <Compile Include="Controllers\API\OrderServicesController.cs" />
     <Compile Include="Controllers\API\PartCategoriesController.cs" />
     <Compile Include="Controllers\API\PartsController.cs" />
     <Compile Include="Controllers\API\PartsInServiceCenterController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\OrderServicesController.cs" />
     <Compile Include="Controllers\PartCategoriesController.cs" />
     <Compile Include="Controllers\PartsController.cs" />
     <Compile Include="Controllers\ServiceAppliancesController.cs" />
@@ -221,6 +223,8 @@
     <Compile Include="Dtos\EmployeeDto.cs" />
     <Compile Include="Dtos\EmployeePositionDto.cs" />
     <Compile Include="Dtos\OrderDto.cs" />
+    <Compile Include="Dtos\OrderFulfillmentDto.cs" />
+    <Compile Include="Dtos\OrderServiceDto.cs" />
     <Compile Include="Dtos\PartCategoryDto.cs" />
     <Compile Include="Dtos\PartDto.cs" />
     <Compile Include="Dtos\PartInServiceCenterDto.cs" />
@@ -228,6 +232,7 @@
     <Compile Include="Dtos\ServiceCenterBrandDto.cs" />
     <Compile Include="Dtos\ServiceCenterDeviceTypeDto.cs" />
     <Compile Include="Dtos\ServiceCenterDto.cs" />
+    <Compile Include="Dtos\ServiceDetailsDto.cs" />
     <Compile Include="Dtos\ServiceTypeDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,80 +261,9 @@
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="tt\Brand.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\City.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\Customer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\DeviceType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\Employee.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\EmployeePosition.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="tt\Order.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\OrderFulfillment.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\OrderService.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\Part.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\PartCategory.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\PartInServiceCenter.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\ServiceAppliance.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\ServiceCenter.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\ServiceCenterBrand.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\ServiceCenterDeviceType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\ServiceDetails.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\ServiceType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tt\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\CityFormViewModel.cs" />
     <Compile Include="ViewModels\EmployeeFormViewModel.cs" />
+    <Compile Include="ViewModels\OrderServicesViewModel.cs" />
     <Compile Include="ViewModels\OrderViewViewModel.cs" />
     <Compile Include="ViewModels\PartFormViewModel.cs" />
     <Compile Include="ViewModels\PartInServiceCenterViewModel.cs" />
@@ -374,16 +308,6 @@
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
     <Content Include="Scripts\typeahead.jquery.min.js" />
-    <Content Include="tt\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="tt\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -445,13 +369,7 @@
     <Content Include="Views\ServiceCenters\Index.cshtml" />
     <Content Include="Views\ServiceCenters\ServiceCenterForm.cshtml" />
     <Content Include="Views\ServiceCenters\View.cshtml" />
-    <EntityDeploy Include="tt\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="tt\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
+    <Content Include="Views\OrderServices\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,8 +1,34 @@
 ﻿$(document).ready(function () {
 
+    $('#order-services').DataTable({
+        ajax: {
+            url: "/api/OrderServices",
+            data: { 'id': $('#orderId').val() },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "serviceType.name"
+            },
+            {
+                data: "totalServicePrice"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/orderServices/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                        "<a href='/orderServices/delete/" + data + "' class='btn-link js-delete' data-order-service-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+
+
 
     /* Service center device types */
-    var serviceCenterBrandsTable = $('#deviceTypesInServiceCenter').DataTable({
+    $('#deviceTypesInServiceCenter').DataTable({
         ajax: {
             url: "/api/ServiceCenterDeviceTypes",
             data: { 'id': $('#centerTargetId').val() },
@@ -51,8 +77,9 @@
         $('#deviceType').typeahead("val", "");
     });
 
+
     /* Service center brands */
-    var serviceCenterBrandsTable = $('#brandsInServiceCenter').DataTable({
+    $('#brandsInServiceCenter').DataTable({
         ajax: {
             url: "/api/ServiceCenterBrands",
             data: { 'id': $('#centerTargetId').val() },
@@ -104,7 +131,7 @@
 
 
     /* Parts in service center */
-    var partsInServiceCenterTable = $('#partsInServiceCenter').DataTable({
+    $('#partsInServiceCenter').DataTable({
         ajax: {
             url: "/api/PartsInServiceCenter/GetPartsInServiceCenter",
             data: { 'id': $('#centerTargetId').val() },
@@ -171,6 +198,9 @@
         partId = 0;
         $('#part').typeahead("val", "");
     });
+
+
+
 
     var serviceCentersTable = $('#service-centers').DataTable({
         ajax: {

@@ -31,7 +31,10 @@ namespace CourseWork.ServiceCenter.Controllers
             if (orderInDb == null)
                 return HttpNotFound();
 
-            var serviceCenter = _context.ServiceCenters.SingleOrDefault(c => c.Id == orderInDb.Employee.ServiceCenterId);
+            var serviceCenter = _context.ServiceCenters
+                .Include(c => c.City)
+                .SingleOrDefault(c => c.Id == orderInDb.Employee.ServiceCenterId);
+
             var viewModel = new OrderViewViewModel
             {
                 Order = orderInDb,

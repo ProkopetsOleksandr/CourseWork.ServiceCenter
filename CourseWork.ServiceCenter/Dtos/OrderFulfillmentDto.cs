@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseWork.ServiceCenter.Models
+namespace CourseWork.ServiceCenter.Dtos
 {
-    [Table("OrderFulfillment")]
-    public class OrderFulfillment
+    public class OrderFulfillmentDto
     {
         public int Id { get; set; }
 
@@ -18,8 +17,8 @@ namespace CourseWork.ServiceCenter.Models
 
         public int EmployeeId { get; set; }
 
-        public Employee Employee { get; set; }
+        public EmployeeDto Employee { get; set; }
 
-        public OrderService OrderService { get; set; }
+        public OrderServiceDto OrderService { get; set; }
     }
 }
