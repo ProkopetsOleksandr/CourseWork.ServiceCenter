@@ -1,4 +1,5 @@
 ﻿using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 

@@ -201,6 +201,7 @@
     <Compile Include="Controllers\API\ServiceCenterDeviceTypesController.cs" />
     <Compile Include="Controllers\API\ServiceCentersController.cs" />
     <Compile Include="Controllers\API\ServiceTypesController.cs" />
+    <Compile Include="Controllers\API\UsersController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -241,6 +242,14 @@
     <Compile Include="Migrations\202005030758104_Identity.Designer.cs">
       <DependentUpon>202005030758104_Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005031635334_PupulateRoles.cs" />
+    <Compile Include="Migrations\202005031635334_PupulateRoles.Designer.cs">
+      <DependentUpon>202005031635334_PupulateRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005031636534_AddAdminUser.cs" />
+    <Compile Include="Migrations\202005031636534_AddAdminUser.Designer.cs">
+      <DependentUpon>202005031636534_AddAdminUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Brand.cs" />
@@ -250,6 +259,7 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeePosition.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Identity\Role.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderFulfillment.cs" />
@@ -276,6 +286,7 @@
     <Compile Include="ViewModels\ServiceCenterDeviceTypeViewModel.cs" />
     <Compile Include="ViewModels\ServiceCenterViewModel.cs" />
     <Compile Include="ViewModels\ServiceCenterViewViewModel.cs" />
+    <Compile Include="ViewModels\UsersWithRolesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\DataTables\dataTables.bootstrap4.css" />
@@ -374,6 +385,8 @@
     <Content Include="Views\ServiceCenters\ServiceCenterForm.cshtml" />
     <Content Include="Views\ServiceCenters\View.cshtml" />
     <Content Include="Views\OrderServices\View.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,6 +406,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202005030758104_Identity.resx">
       <DependentUpon>202005030758104_Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005031635334_PupulateRoles.resx">
+      <DependentUpon>202005031635334_PupulateRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005031636534_AddAdminUser.resx">
+      <DependentUpon>202005031636534_AddAdminUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

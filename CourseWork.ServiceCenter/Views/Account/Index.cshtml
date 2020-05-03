@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CourseWork.ServiceCenter.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i> Користувачі системи
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="users" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>UserName</th>
+                        <th>Логін</th>
+                        <th>Роль</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>UserName</th>
+                        <th>Логін</th>
+                        <th>Роль</th>
+                        <th>Дії</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+}

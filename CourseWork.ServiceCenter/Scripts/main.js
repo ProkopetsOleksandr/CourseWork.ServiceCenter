@@ -1,5 +1,37 @@
 ﻿$(document).ready(function () {
 
+    var usersTable = $('#users').DataTable({
+        ajax: {
+            url: "/api/users",
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "username"
+            },
+            {
+                data: "email"
+            },
+            {
+                data: "role"
+            },
+            {
+                data: "userId",
+                render: function (data) {
+                    var btns = "<div class='actions-btn'><a href='/account/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+
+                        "<a href='/account/delete/" + data + "' class='btn-link js-delete' data-order-service-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+
+                    return btns;
+                }
+            }
+        ]
+    });
+
+
+
+
+
     $('#order-services').DataTable({
         ajax: {
             url: "/api/OrderServices",

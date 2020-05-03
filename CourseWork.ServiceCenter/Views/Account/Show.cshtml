@@ -1,0 +1,26 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.UserViewViewModel
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        Інформація про користувача
+    </div>
+    <div class="card-body">
+
+        <div class="table-responsive mb-5">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Сервіс центр</td>
+                        <td><a href="/serviceCenter/edit/@Model.ServiceCenter.Id">@Model.ServiceCenter.CenterNumber (@Model.ServiceCenter.City.Title)</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+

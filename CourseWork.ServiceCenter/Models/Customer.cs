@@ -17,7 +17,5 @@ namespace CourseWork.ServiceCenter.Models
         [Required]
         [StringLength(15)]
         public string Phone { get; set; }
-
-        //public virtual ICollection<Order> Order { get; set; }
     }
 }

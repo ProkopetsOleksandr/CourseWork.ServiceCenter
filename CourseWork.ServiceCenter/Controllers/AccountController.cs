@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CourseWork.ServiceCenter.Models;
+using System.Collections.Generic;
+using CourseWork.ServiceCenter.ViewModels;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
@@ -50,6 +52,12 @@ namespace CourseWork.ServiceCenter.Controllers
             {
                 _userManager = value;
             }
+        }
+
+
+        public ActionResult Index()
+        {
+            return View();
         }
 
         //
