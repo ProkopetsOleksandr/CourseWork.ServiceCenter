@@ -18,14 +18,30 @@
             {
                 data: "userId",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/account/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
+                    var btns = "<div class='actions-btn'><a href='/account/view/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
 
-                        "<a href='/account/delete/" + data + "' class='btn-link js-delete' data-order-service-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+                        "<a href='/account/delete/" + data + "' class='btn-link js-delete' data-user-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
                 }
             }
         ]
+    });
+    $("#users").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цього користувача?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/users/" + button.attr("data-user-id"),
+                    method: "DELETE",
+                    success: function () {
+                        usersTable.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            }
+        });
     });
 
 

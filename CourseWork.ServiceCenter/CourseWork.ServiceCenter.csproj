@@ -250,6 +250,10 @@
     <Compile Include="Migrations\202005031636534_AddAdminUser.Designer.cs">
       <DependentUpon>202005031636534_AddAdminUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005040812434_AddEmployeeIdToApplicationUser.cs" />
+    <Compile Include="Migrations\202005040812434_AddEmployeeIdToApplicationUser.Designer.cs">
+      <DependentUpon>202005040812434_AddEmployeeIdToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Brand.cs" />
@@ -281,6 +285,7 @@
     <Compile Include="ViewModels\OrderViewViewModel.cs" />
     <Compile Include="ViewModels\PartFormViewModel.cs" />
     <Compile Include="ViewModels\PartInServiceCenterViewModel.cs" />
+    <Compile Include="ViewModels\RegisterPageViewModel.cs" />
     <Compile Include="ViewModels\ServiceApplianceViewModel.cs" />
     <Compile Include="ViewModels\ServiceCenterBrandViewModel.cs" />
     <Compile Include="ViewModels\ServiceCenterDeviceTypeViewModel.cs" />
@@ -412,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005031636534_AddAdminUser.resx">
       <DependentUpon>202005031636534_AddAdminUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005040812434_AddEmployeeIdToApplicationUser.resx">
+      <DependentUpon>202005040812434_AddEmployeeIdToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

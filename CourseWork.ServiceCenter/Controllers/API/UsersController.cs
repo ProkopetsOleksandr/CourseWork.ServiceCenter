@@ -37,5 +37,19 @@ namespace CourseWork.ServiceCenter.Controllers.API
 
             return Ok(usersWithRoles);
         }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteUser(string id)
+        {
+            var userInDb = _context.Users.Find(id);
+
+            if (userInDb == null)
+                return NotFound();
+
+            _context.Users.Remove(userInDb);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model CourseWork.ServiceCenter.Models.RegisterViewModel
+﻿@model CourseWork.ServiceCenter.ViewModels.RegisterPageViewModel
 @{
     ViewBag.Title = "Регистрация";
 }
@@ -8,31 +8,39 @@
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Создание новой учетной записи.</h4>
+    <h4>Створення нового облікового запису.</h4>
     <hr />
+
     @Html.ValidationSummary("", new { @class = "text-danger" })
+
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+        @Html.LabelFor(c => c.RegisterViewModel.EmployeeId)
+        @Html.DropDownListFor(c => c.RegisterViewModel.EmployeeId, new SelectList(Model.Employees, "Id", "Name"), "Оберіть працівника", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.RegisterViewModel.EmployeeId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterViewModel.Email, new { @class = "col-md-2 control-label" })
+        @Html.TextBoxFor(m => m.RegisterViewModel.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegisterViewModel.Password, new { @class = "col-md-2 control-label" })
+        @Html.PasswordFor(m => m.RegisterViewModel.Password, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
+        @Html.LabelFor(m => m.RegisterViewModel.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.PasswordFor(m => m.RegisterViewModel.ConfirmPassword, new { @class = "form-control" })
     </div>
+
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
+        @Html.LabelFor(c => c.RegisterViewModel.RoleId)
+        @Html.DropDownListFor(c => c.RegisterViewModel.RoleId, new SelectList(Model.Roles, "Id", "Name"), "Оберіть роль", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.RegisterViewModel.RoleId)
     </div>
+
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Регистрация" />
-        </div>
+        <input type="submit" class="btn btn-outline-success" value="Регістрація" />
     </div>
 }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace CourseWork.ServiceCenter.Models
@@ -64,20 +65,26 @@ namespace CourseWork.ServiceCenter.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "Працівник")]
+        public int EmployeeId { get; set; }
+
+        [Display(Name = "Роль")]
+        public string RoleId { get; set; }
+
         [Required]
         [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
+        [Display(Name = "Логін")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Значення {0} повинно мати не менше {2} символів.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение пароля")]
-        [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
+        [Display(Name = "Підтвердження пароля")]
+        [Compare("Password", ErrorMessage = "Пароль та його підтвердження не збігаються.")]
         public string ConfirmPassword { get; set; }
     }
 
