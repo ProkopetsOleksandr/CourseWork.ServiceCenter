@@ -1,12 +1,12 @@
-﻿using CourseWork.ServiceCenter.Models;
-using System;
-using System.Collections.Generic;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
+    [OnlyAllowed(Roles = Role.Admin + "," + Role.Manager)]
     public class DeviceTypesController : Controller
     {
         private ApplicationDbContext _context;
@@ -19,15 +19,19 @@ namespace CourseWork.ServiceCenter.Controllers
         // GET: DeviceTypes
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(Role.Admin))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
-
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             return View("DeviceTypeForm", new DeviceType());
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var deviceTypeInDb = _context.DeviceTypes.Find(id);
@@ -38,6 +42,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("DeviceTypeForm", deviceTypeInDb);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Save(DeviceType deviceType)
         {
             if (!ModelState.IsValid)

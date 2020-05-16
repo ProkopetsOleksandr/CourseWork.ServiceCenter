@@ -28,6 +28,25 @@ namespace CourseWork.ServiceCenter.Controllers.API
             return Ok(parts);
         }
 
+        [Route("api/partsInServiceCenter/filter")]
+        [HttpGet]
+        public IHttpActionResult PartsFilter(int id, string query = null)
+        {
+            var partsQuery = _context.PartsInServiceCenters
+                .Include(p => p.Part)
+                .Where(p => p.ServiceCenterId == id && p.Quantity > 0)
+                .AsQueryable();
+
+            partsQuery = partsQuery.Where(p => p.Part.Model.Contains(query));
+
+
+            var parts = partsQuery
+                .ToList()
+                .Select(p => Mapper.Map<Part, PartDto>(p.Part));
+
+            return Ok(parts);
+        }
+
         [HttpPost]
         public IHttpActionResult AddPartToServiceCenter(PartInServiceCenterViewModel viewModel)
         {

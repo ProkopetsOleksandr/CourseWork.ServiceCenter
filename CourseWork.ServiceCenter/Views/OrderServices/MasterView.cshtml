@@ -1,0 +1,75 @@
+﻿@model CourseWork.ServiceCenter.ViewModels.OrderServicesViewModel
+@{
+    ViewBag.Title = "View";
+}
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        Інформація про сервіс замовлення
+    </div>
+    <div class="card-body">
+        <div class="table-responsive mb-3">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Сервіс</td>
+                        <td>@Model.OrderService.ServiceType.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Ціна сервісу</td>
+                        <td>@Model.OrderService.ServiceType.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Загальна ціна</td>
+                        <td>@Model.OrderService.TotalServicePrice</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <input id="service-id" type="hidden" value="@Model.OrderService.Id" />
+        <input id="serviceCenter-id" type="hidden" value="@Session["serviceCenterId"]" />
+
+        <h5>Використані запчастини</h5>
+
+        <div class="table-responsive">
+            <table id="serviceParts" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Назва</th>
+                        <th>Ціна</th>
+                        <th>Кількість</th>
+                        <th>Сума</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Назва</th>
+                        <th>Ціна</th>
+                        <th>Кількість</th>
+                        <th>Сума</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+        <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Додати запчастину
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="well">
+                <input id="part" type="text" value="" />
+                <input id="quantity" type="number" min="1" value="" />
+                <button id="addPartToService">Додати</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+}

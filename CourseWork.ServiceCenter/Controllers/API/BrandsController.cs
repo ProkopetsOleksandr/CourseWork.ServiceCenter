@@ -2,11 +2,9 @@
 using CourseWork.ServiceCenter.Dtos;
 using CourseWork.ServiceCenter.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace CourseWork.ServiceCenter.Controllers.API
 {
@@ -33,6 +31,18 @@ namespace CourseWork.ServiceCenter.Controllers.API
                 .Select(Mapper.Map<Brand, BrandDto>);
 
             return Ok(brandDtos);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetBrandsInServiceCenter(int id)
+        {
+            var brandsInServiceCenter = _context.ServiceCenterBrands
+                .Include(b => b.Brand)
+                .Where(c => c.ServiceCenterId == id)
+                .Select(b => new { Title = b.Brand.Title })
+                .ToList();
+
+            return Ok(brandsInServiceCenter);
         }
 
         [HttpDelete]

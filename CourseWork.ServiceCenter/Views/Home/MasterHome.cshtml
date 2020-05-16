@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1 class="mt-4">Панель керування</h1>
+
+<span>
+    Сервіс центр: @Session["serviceCenterNumber"].ToString()
+</span>
+
+<input id="emp-id" type="hidden" value="@Session["employeeId"]" />
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i> Мої сервіси
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="master-services" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Замовлення</th>
+                        <th>Сервіс</th>
+                        <th>Дата початку</th>
+                        <th>Дата завершення</th>
+                        <th>Статус</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Замовлення</th>
+                        <th>Сервіс</th>
+                        <th>Дата початку</th>
+                        <th>Дата завершення</th>
+                        <th>Статус</th>
+                        <th>Дії</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+}

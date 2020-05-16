@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using CourseWork.ServiceCenter.ViewModels;
 using System.Linq;
+using CourseWork.ServiceCenter.Models.Identity;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
@@ -14,7 +15,9 @@ namespace CourseWork.ServiceCenter.Controllers
             _context = new ApplicationDbContext();
         }
 
-        // GET: OrderServices
+
+
+        
         public ActionResult View(int id)
         {
             var serviceInDb = _context.OrderServices
@@ -40,7 +43,10 @@ namespace CourseWork.ServiceCenter.Controllers
                 ServiceDetails = serviceDetails
             };
 
-
+            if(User.IsInRole(Role.Master))
+            {
+                return View("MasterView", viewModel);
+            }
             return View(viewModel);
         }
     }

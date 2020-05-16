@@ -4,6 +4,7 @@ using System.Data.Entity;
 using AutoMapper;
 using CourseWork.ServiceCenter.Models;
 using CourseWork.ServiceCenter.Dtos;
+using CourseWork.ServiceCenter.ViewModels;
 
 namespace CourseWork.ServiceCenter.Controllers.API
 {
@@ -27,6 +28,36 @@ namespace CourseWork.ServiceCenter.Controllers.API
                 .Select(Mapper.Map<OrderService, OrderServiceDto>);
 
             return Ok(serviceDtos);
+        }
+
+        [HttpPost]
+        public IHttpActionResult AddPartToService(PartOrderServicesViewModel viewModel)
+        {
+            var partInServiceCenter = _context.PartsInServiceCenters
+                .Include(p => p.Part)
+                .SingleOrDefault(p => p.ServiceCenterId == viewModel.ServiceCenterId && p.PartId == viewModel.PartId);
+
+            if (partInServiceCenter == null)
+                return NotFound();
+
+
+
+
+            var orderServiceInDb = _context.OrderServices.Find(viewModel.OrderServiceId);
+            orderServiceInDb.TotalServicePrice += partInServiceCenter.Part.Price * viewModel.Quantity;
+
+
+            var serviceDetails = new ServiceDetails()
+            {
+                OrderServiceId = viewModel.OrderServiceId,
+                PartInServiceCenterId = partInServiceCenter.Id,
+                Quantity = viewModel.Quantity
+            };
+
+            _context.ServiceDetails.Add(serviceDetails);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

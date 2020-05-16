@@ -736,7 +736,7 @@
 
     var customersTable = $('#customers').DataTable({
         ajax: {
-            url: "/api/customers",
+            url: "/api/customers/getcustomers",
             dataSrc: ""
         },
         columns: [

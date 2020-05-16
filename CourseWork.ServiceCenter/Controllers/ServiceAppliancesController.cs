@@ -1,4 +1,6 @@
-﻿using CourseWork.ServiceCenter.Models;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 using CourseWork.ServiceCenter.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,13 +19,16 @@ namespace CourseWork.ServiceCenter.Controllers
             _context = new ApplicationDbContext();
         }
 
-
         // GET: ServiceAppliances
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(Role.Admin))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             var applianceViewModel = new ServiceApplianceViewModel
@@ -36,6 +41,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("ServiceApplianceForm", applianceViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var applianceInDb = _context.ServiceAppliances.Find(id);
@@ -53,6 +59,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("ServiceApplianceForm", applianceViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Save(ServiceApplianceViewModel viewModel)
         {
             var appliance = viewModel.ServiceAppliance;

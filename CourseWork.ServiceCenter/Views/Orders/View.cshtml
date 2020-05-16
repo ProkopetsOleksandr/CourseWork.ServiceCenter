@@ -1,7 +1,6 @@
 ﻿@model CourseWork.ServiceCenter.ViewModels.OrderViewViewModel
 @{
     ViewBag.Title = "ViewCity";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="card mb-4 mt-4">
@@ -17,7 +16,7 @@
                 <tbody>
                     <tr>
                         <td>Сервіс центр</td>
-                        <td><a href="/serviceCenter/edit/@Model.ServiceCenter.Id">@Model.ServiceCenter.CenterNumber (@Model.ServiceCenter.City.Title)</a></td>
+                        <td><a href="/serviceCenters/view/@Model.ServiceCenter.Id">@Model.ServiceCenter.CenterNumber (@Model.ServiceCenter.City.Title)</a></td>
                     </tr>
                     <tr>
                         <td>Номер замовлення</td>
@@ -46,6 +45,10 @@
                     <tr>
                         <td>Побутовий пристрій</td>
                         <td>@Model.Order.ServiceAppliance.Model</td>
+                    </tr>
+                    <tr>
+                        <td>Опис</td>
+                        <td>@Model.Order.Description</td>
                     </tr>
                     <tr>
                         <td>Кінцева ціна</td>

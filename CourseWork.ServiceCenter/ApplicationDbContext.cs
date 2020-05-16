@@ -1,4 +1,5 @@
-﻿using CourseWork.ServiceCenter.Models;
+﻿using CourseWork.ServiceCenter.DatabaseViews;
+using CourseWork.ServiceCenter.Models;
 using CourseWork.ServiceCenter.Models.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
@@ -26,6 +27,13 @@ namespace CourseWork.ServiceCenter
         public DbSet<OrderService> OrderServices { get; set; }
         public DbSet<OrderFulfillment> OrderFulfillments { get; set; }
         public DbSet<ServiceDetails> ServiceDetails { get; set; }
+
+
+
+        /* VIEW */
+        public DbSet<EmployeeLoad> EmployeeLoad { get; set; }
+        public DbSet<NewOrderServices> NewOrderServices { get; set; }
+        public DbSet<Services> Services { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

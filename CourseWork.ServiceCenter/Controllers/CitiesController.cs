@@ -1,13 +1,17 @@
-﻿using CourseWork.ServiceCenter.Models;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 using CourseWork.ServiceCenter.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
+    [OnlyAllowed(Roles = Role.Admin + "," + Role.Manager)]
     public class CitiesController : Controller
     {
         private ApplicationDbContext _context;
@@ -17,17 +21,21 @@ namespace CourseWork.ServiceCenter.Controllers
             _context = new ApplicationDbContext();
         }
 
-        // GET: Cities
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(Role.Admin))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             return View("CityForm", new City());
         }
 
+        
         public ActionResult View(int id)
         {
             var cityInDb = _context.Cities.Find(id);
@@ -44,6 +52,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View(cityViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var cityInDb = _context.Cities.Find(id);
@@ -54,6 +63,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("CityForm", cityInDb);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Save(City city)
         {
             if (!ModelState.IsValid)

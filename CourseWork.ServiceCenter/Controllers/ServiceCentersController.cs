@@ -1,8 +1,8 @@
-﻿using CourseWork.ServiceCenter.ViewModels;
-using System;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models.Identity;
+using CourseWork.ServiceCenter.ViewModels;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CourseWork.ServiceCenter.Controllers
@@ -18,7 +18,10 @@ namespace CourseWork.ServiceCenter.Controllers
         // GET: ServiceCenters
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(Role.Admin))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
         public ActionResult View(int id)
@@ -33,6 +36,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View(centerInDb);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             var centerViewModel = new ServiceCenterViewModel
@@ -44,6 +48,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("ServiceCenterForm", centerViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var centerInDb = _context.ServiceCenters.Find(id);
@@ -60,6 +65,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("ServiceCenterForm", centerViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Save(ServiceCenterViewModel serviceCenterViewModel)
         {
             var serviceCenter = serviceCenterViewModel.ServiceCenter;

@@ -28,11 +28,11 @@
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i> @Session["user-email"].ToString()</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Activity Log</a>
+                    <a class="dropdown-item" href="/Manage/index">Редагувати</a><a class="dropdown-item" href="#">Activity Log</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="/Account/LogOff">Вийти</a>
                 </div>
             </li>
         </ul>
@@ -52,8 +52,24 @@
 
                         <div class="sb-sidenav-menu-heading">Мої сутності</div>
 
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-scroll"></i></div>
+                            Замовлення
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/orders/index">Всі замовлення</a><a class="nav-link" href="/orders/new">Нове замовлення</a></nav>
+                        </div>
+
+
+
+
+
+
+
+
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-cog"></i></div>
                             Користувачі системи
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -72,16 +88,20 @@
                         </div>
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
                             Працівники
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseEmployees" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/employees/index">Всі працівники</a><a class="nav-link" href="/employees/new">Створити нового</a></nav>
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/employees/index">Всі працівники</a>
+                                <a class="nav-link" href="/employees/new">Створити нового</a>
+                                <a class="nav-link" href="/employeePositions/index">Всі посади</a>
+                            </nav>
                         </div>
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBrands" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-copyright"></i></div>
                             Бренди
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -89,8 +109,9 @@
                             <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/brands/index">Всі бренди</a><a class="nav-link" href="/brands/new">Створити новий</a></nav>
                         </div>
 
+
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServiceTypes" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
                             Сервіси
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -98,17 +119,9 @@
                             <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/servicetypes/index">Всі сервіси</a><a class="nav-link" href="/servicetypes/new">Створити новий</a></nav>
                         </div>
 
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployeePositions" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                            Посади
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseEmployeePositions" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/employeePositions/index">Всі посади</a><a class="nav-link" href="/employeePositions/new">Створити нову</a></nav>
-                        </div>
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDeviceTypes" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-blender-phone"></i></div>
                             Типи пристроїв
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -117,21 +130,12 @@
                         </div>
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCities" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-city"></i></div>
                             Міста
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseCities" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/cities/index">Всі міста</a><a class="nav-link" href="/cities/new">Створити нове</a></nav>
-                        </div>
-
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePartCategories" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                            Категорії запчастин
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePartCategories" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/partCategories/index">Всі категорії</a><a class="nav-link" href="/partCategories/new">Створити нову</a></nav>
                         </div>
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseParts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -140,11 +144,15 @@
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseParts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/parts/index">Всі запчастини</a><a class="nav-link" href="/parts/new">Створити нову</a></nav>
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/parts/index">Всі запчастини</a>
+                                <a class="nav-link" href="/parts/new">Створити нову</a>
+                                <a class="nav-link" href="/partCategories/index">Категорії запчастин</a>
+                            </nav>
                         </div>
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServiceAppliance" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-laptop"></i></div>
                             Побутова техніка
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -152,17 +160,10 @@
                             <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/serviceAppliances/index">Каталог</a><a class="nav-link" href="/serviceAppliances/new">Створити нову</a></nav>
                         </div>
 
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                            Замовлення
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseOrders" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/orders/index">Всі замовлення</a><a class="nav-link" href="/orders/new">Нове замовлення</a></nav>
-                        </div>
+
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServiceCenters" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-tools"></i></div>
                             Сервіс центри
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -170,56 +171,7 @@
                             <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="/ServiceCenters/index">Всі сервіс центри</a><a class="nav-link" href="/ServiceCenters/new">Новий сервіс центр</a></nav>
                         </div>
 
-
-
-
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Layouts1
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="layout-static.html">Static Navigation</a><a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a></nav>
-                        </div>
-
-
-
-
-
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="login.html">Login</a><a class="nav-link" href="register.html">Register</a><a class="nav-link" href="password.html">Forgot Password</a></nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="401.html">401 Page</a><a class="nav-link" href="404.html">404 Page</a><a class="nav-link" href="500.html">500 Page</a></nav>
-                                </div>
-                            </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a><a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
                     </div>
-                </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
                     Start Bootstrap
@@ -250,6 +202,7 @@
     </div>
 
     @Scripts.Render("~/bundles/lib")
+    @Scripts.Render("~/Scripts/main.js")
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     @RenderSection("scripts", false)
 

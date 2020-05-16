@@ -9,14 +9,14 @@ namespace CourseWork.ServiceCenter.Models
         public int Id { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime DateStart { get; set; }
+        public DateTime? DateStart { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? DateDone { get; set; }
 
         public int OrderServiceId { get; set; }
 
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
 
         public Employee Employee { get; set; }
 

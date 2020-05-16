@@ -1,20 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
+using CourseWork.ServiceCenter.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using CourseWork.ServiceCenter.Models;
-using System.Collections.Generic;
-using CourseWork.ServiceCenter.ViewModels;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationDbContext _context;
@@ -63,7 +61,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View();
         }
 
-        //
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -72,7 +70,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View();
         }
 
-        //
+
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -85,9 +83,17 @@ namespace CourseWork.ServiceCenter.Controllers
             }
 
             var user = _context.Users.SingleOrDefault(u => u.Email == model.Email);
+            if(user != null)
+            {
+                var employee = _context.Employees
+                    .Include(e => e.ServiceCenter)
+                    .SingleOrDefault(e => e.Id == user.EmployeeId);
+                Session["employeeId"] = employee.Id;
+                Session["serviceCenterNumber"] = employee.ServiceCenter.CenterNumber;
+                Session["serviceCenterId"] = employee.ServiceCenter.Id;
+                Session["user-email"] = user.Email;
+            }
 
-            // Сбои при входе не приводят к блокированию учетной записи
-            // Чтобы ошибки при вводе пароля инициировали блокирование учетной записи, замените на shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -149,7 +155,7 @@ namespace CourseWork.ServiceCenter.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [OnlyAllowed(Roles=Role.Admin)]
         public ActionResult Register()
         {
             var _context = new ApplicationDbContext();
@@ -166,7 +172,7 @@ namespace CourseWork.ServiceCenter.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [OnlyAllowed(Roles = Role.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterPageViewModel viewModel)
         {
@@ -414,10 +420,9 @@ namespace CourseWork.ServiceCenter.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+      
+        // GET: /Account/LogOff
+        [HttpGet]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

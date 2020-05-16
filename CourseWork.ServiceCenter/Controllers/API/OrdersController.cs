@@ -29,6 +29,20 @@ namespace CourseWork.ServiceCenter.Controllers.API
             return Ok(orderDtos);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetOrders(int id)
+        {
+            var orderDtos = _context.Orders
+                .Include(o => o.ServiceAppliance)
+                .Include(o => o.Employee)
+                .Include(o => o.Customer)
+                .Where(o => o.Employee.ServiceCenterId == id)
+                .ToList()
+                .Select(Mapper.Map<Order, OrderDto>);
+
+            return Ok(orderDtos);
+        }
+
         [HttpDelete]
         public IHttpActionResult DeleteOrder(int id)
         {

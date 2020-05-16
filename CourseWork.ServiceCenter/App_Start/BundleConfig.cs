@@ -23,8 +23,7 @@ namespace CourseWork.ServiceCenter
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                       "~/Scripts/jquery-{version}.js",
                       "~/Scripts/bootbox.js",
-                      "~/Scripts/typeahead.bundle.js",
-                      "~/Scripts/main.js"));
+                      "~/Scripts/typeahead.bundle.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/dataTable").Include(
                 "~/Scripts/DataTables/jquery.dataTables.js",

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using CourseWork.ServiceCenter;
+﻿using CourseWork.ServiceCenter.Attributes;
 using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
+using System.Web.Mvc;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
+    [OnlyAllowed(Roles = Role.Admin + "," + Role.Manager)]
     public class ServiceTypesController : Controller
     {
         private ApplicationDbContext _context;
@@ -23,15 +18,19 @@ namespace CourseWork.ServiceCenter.Controllers
         // GET: ServiceTypes
         public ActionResult Index()
         {
-            return View();
+            if(User.IsInRole(Role.Admin))
+                return View("List");
+
+            return View("ReadOnlyList");
         }
 
-        // GET: ServiceTypes/Create
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             return View("ServiceTypeForm", new ServiceType());
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var serviceTypeInDb = _context.ServiceTypes.Find(id);
@@ -42,6 +41,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("ServiceTypeForm", serviceTypeInDb);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         [ValidateAntiForgeryToken]
         public ActionResult Save(ServiceType serviceType)
         {

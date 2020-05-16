@@ -184,6 +184,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\OnlyAllowedAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BrandsController.cs" />
     <Compile Include="Controllers\API\CitiesController.cs" />
@@ -191,6 +192,9 @@
     <Compile Include="Controllers\API\DeviceTypesController.cs" />
     <Compile Include="Controllers\API\EmployeePositionsController.cs" />
     <Compile Include="Controllers\API\EmployeesController.cs" />
+    <Compile Include="Controllers\API\JobsLoadController.cs" />
+    <Compile Include="Controllers\API\NewOrderServicesController.cs" />
+    <Compile Include="Controllers\API\OrdersFulfillmentController.cs" />
     <Compile Include="Controllers\API\OrdersController.cs" />
     <Compile Include="Controllers\API\OrderServicesController.cs" />
     <Compile Include="Controllers\API\PartCategoriesController.cs" />
@@ -200,6 +204,7 @@
     <Compile Include="Controllers\API\ServiceCenterBrandsController.cs" />
     <Compile Include="Controllers\API\ServiceCenterDeviceTypesController.cs" />
     <Compile Include="Controllers\API\ServiceCentersController.cs" />
+    <Compile Include="Controllers\API\ServicesController.cs" />
     <Compile Include="Controllers\API\ServiceTypesController.cs" />
     <Compile Include="Controllers\API\UsersController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
@@ -217,6 +222,9 @@
     <Compile Include="Controllers\ServiceAppliancesController.cs" />
     <Compile Include="Controllers\ServiceCentersController.cs" />
     <Compile Include="Controllers\ServiceTypesController.cs" />
+    <Compile Include="DatabaseViews\EmployeeLoad.cs" />
+    <Compile Include="DatabaseViews\NewOrderServices.cs" />
+    <Compile Include="DatabaseViews\Services.cs" />
     <Compile Include="Dtos\BrandDto.cs" />
     <Compile Include="Dtos\CityDto.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
@@ -254,6 +262,14 @@
     <Compile Include="Migrations\202005040812434_AddEmployeeIdToApplicationUser.Designer.cs">
       <DependentUpon>202005040812434_AddEmployeeIdToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005081341008_UpdateOrderFulfillmentModel.cs" />
+    <Compile Include="Migrations\202005081341008_UpdateOrderFulfillmentModel.Designer.cs">
+      <DependentUpon>202005081341008_UpdateOrderFulfillmentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005141303311_Dummy.cs" />
+    <Compile Include="Migrations\202005141303311_Dummy.Designer.cs">
+      <DependentUpon>202005141303311_Dummy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Brand.cs" />
@@ -281,10 +297,13 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CityFormViewModel.cs" />
     <Compile Include="ViewModels\EmployeeFormViewModel.cs" />
+    <Compile Include="ViewModels\OrderFulfillmentViewModel.cs" />
     <Compile Include="ViewModels\OrderServicesViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\OrderViewViewModel.cs" />
     <Compile Include="ViewModels\PartFormViewModel.cs" />
     <Compile Include="ViewModels\PartInServiceCenterViewModel.cs" />
+    <Compile Include="ViewModels\PartOrderServicesViewModel.cs" />
     <Compile Include="ViewModels\RegisterPageViewModel.cs" />
     <Compile Include="ViewModels\ServiceApplianceViewModel.cs" />
     <Compile Include="ViewModels\ServiceCenterBrandViewModel.cs" />
@@ -302,6 +321,8 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Images\avatar.png" />
+    <EmbeddedResource Include="Images\bg.jpg" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootbox.js" />
@@ -314,7 +335,12 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\DataTables\dataTables.bootstrap4.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
-    <Content Include="ClassDiagram1.cd" />
+    <EmbeddedResource Include="Migrations\202005081341008_UpdateOrderFulfillmentModel.resx">
+      <DependentUpon>202005081341008_UpdateOrderFulfillmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005141303311_Dummy.resx">
+      <DependentUpon>202005141303311_Dummy.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -322,8 +348,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\master-main.js" />
+    <Content Include="Scripts\manager-main.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\order-page.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
@@ -339,8 +368,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -364,39 +391,55 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
-    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\List.cshtml" />
     <Content Include="Views\Employees\EmployeeForm.cshtml" />
-    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Brands\List.cshtml" />
     <Content Include="Views\Brands\BrandForm.cshtml" />
     <Content Include="Views\ServiceTypes\ServiceTypeForm.cshtml" />
-    <Content Include="Views\ServiceTypes\Index.cshtml" />
+    <Content Include="Views\ServiceTypes\List.cshtml" />
     <Content Include="Views\EmployeePositions\Index.cshtml" />
     <Content Include="Views\EmployeePositions\EmployeePositionForm.cshtml" />
-    <Content Include="Views\DeviceTypes\Index.cshtml" />
+    <Content Include="Views\DeviceTypes\List.cshtml" />
     <Content Include="Views\DeviceTypes\DeviceTypeForm.cshtml" />
-    <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Cities\List.cshtml" />
     <Content Include="Views\Cities\CityForm.cshtml" />
     <Content Include="Views\Cities\View.cshtml" />
     <Content Include="Views\PartCategories\Index.cshtml" />
     <Content Include="Views\PartCategories\PartCategoryForm.cshtml" />
-    <Content Include="Views\Parts\Index.cshtml" />
+    <Content Include="Views\Parts\List.cshtml" />
     <Content Include="Views\Parts\PartForm.cshtml" />
     <Content Include="Views\Parts\View.cshtml" />
-    <Content Include="Views\ServiceAppliances\Index.cshtml" />
+    <Content Include="Views\ServiceAppliances\List.cshtml" />
     <Content Include="Views\ServiceAppliances\ServiceApplianceForm.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\View.cshtml" />
-    <Content Include="Views\ServiceCenters\Index.cshtml" />
+    <Content Include="Views\ServiceCenters\List.cshtml" />
     <Content Include="Views\ServiceCenters\ServiceCenterForm.cshtml" />
     <Content Include="Views\ServiceCenters\View.cshtml" />
     <Content Include="Views\OrderServices\View.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Show.cshtml" />
+    <Content Include="Views\Shared\_LayoutManager.cshtml" />
+    <Content Include="Views\Shared\_LayoutLoginPage.cshtml" />
+    <Content Include="Views\Shared\Page404.cshtml" />
+    <Content Include="Views\Brands\ReadOnlyList.cshtml" />
+    <Content Include="Views\Cities\ReadOnlyList.cshtml" />
+    <Content Include="Views\DeviceTypes\ReadOnlyList.cshtml" />
+    <Content Include="Views\Employees\ReadOnlyList.cshtml" />
+    <Content Include="Views\ServiceTypes\ReadOnlyList.cshtml" />
+    <Content Include="Views\ServiceCenters\ReadOnlyList.cshtml" />
+    <Content Include="Views\ServiceAppliances\ReadOnlyList.cshtml" />
+    <Content Include="Views\Parts\ReadOnlyList.cshtml" />
+    <Content Include="Views\Orders\New.cshtml" />
+    <Content Include="Views\Home\ManagerHome.cshtml" />
+    <Content Include="Views\Home\MasterHome.cshtml" />
+    <Content Include="Views\OrdersFulfillment\Edit.cshtml" />
+    <Content Include="Views\Shared\_LayoutMaster.cshtml" />
+    <Content Include="Views\OrderServices\MasterView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PartCategory\" />
-    <Folder Include="Views\Part\" />
+    <Folder Include="Views\OrderFulfillments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1 class="mt-4">Панель керування</h1>
+
+<span class="mb-2 d-block">
+    Сервіс центр: @Session["serviceCenterNumber"].ToString()
+</span>
+
+<div class="row">
+    <a href="/orders/new" class="new-order-btn">Оформити нове замовлення</a>
+    <div class="clearfix"></div>
+</div>
+
+<div class="row">
+
+    <input id="service-center-id" type="hidden" value=@Session["serviceCenterId"].ToString() />
+
+    <div class="col-xl-6">
+        <h5 class="text-center section-header">Нові сервіси</h5>
+        <div class="table-responsive">
+            <table id="new-services" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Замовлення</th>
+                        <th>Сервіс</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Замовлення</th>
+                        <th>Сервіс</th>
+                        <th>Дії</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <h5 class="text-center section-header">Завантаженість майстрів</h5>
+        <div class="table-responsive">
+            <table id="current-load" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Мастер</th>
+                        <th>Кількість наявних сервісів</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Мастер</th>
+                        <th>Кількість наявних сервісів</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+}

@@ -34,6 +34,16 @@ namespace CourseWork.ServiceCenter.Controllers.API
             return Ok(customerDtos);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetMastersInServiceCenter(int id)
+        {
+            var employees = _context.Employees
+                .Where(e => e.ServiceCenterId == id && e.EmployeePositionId == 2)
+                .Select(e => new { e.Name, e.Phone });
+
+            return Ok(employees);
+        }
+
         [HttpDelete]
         public IHttpActionResult DeleteEmployee(int id)
         {

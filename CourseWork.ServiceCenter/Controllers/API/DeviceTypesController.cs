@@ -4,6 +4,7 @@ using CourseWork.ServiceCenter.Models;
 using System;
 using System.Linq;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace CourseWork.ServiceCenter.Controllers.API
 {
@@ -26,6 +27,18 @@ namespace CourseWork.ServiceCenter.Controllers.API
 
             var deviceTypeDtos =  deviceTypeQuery.ToList().Select(Mapper.Map<DeviceType, DeviceTypeDto>);
             return Ok(deviceTypeDtos);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetDeviceTypesInServiceCenter(int id)
+        {
+            var deviceTypesInServiceCenter = _context.ServiceCenterDeviceTypes
+                .Include(t => t.DeviceType)
+                .Where(t => t.ServiceCenterId == id)
+                .Select(t => new { Title = t.DeviceType.Title })
+                .ToList();
+
+            return Ok(deviceTypesInServiceCenter);
         }
 
         [HttpDelete]

@@ -1,13 +1,13 @@
-﻿using CourseWork.ServiceCenter.Models;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 using CourseWork.ServiceCenter.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
+    [OnlyAllowed(Roles = Role.Admin + "," + Role.Manager)]
     public class EmployeesController : Controller
     {
         private ApplicationDbContext _context;
@@ -20,9 +20,13 @@ namespace CourseWork.ServiceCenter.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(Role.Admin))
+                return View("List");
+            
+            return View("ReadOnlyList");
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             var employeeFormViewModel = new EmployeeFormViewModel
@@ -35,6 +39,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("EmployeeForm", employeeFormViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var employeeInDb = _context.Employees.SingleOrDefault(e => e.Id == id);
@@ -52,6 +57,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("EmployeeForm", employeeFormViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Save(Employee employee)
         {
             if(!ModelState.IsValid)

@@ -6,13 +6,15 @@ using System.Web;
 
 namespace CourseWork.ServiceCenter.Models.Identity
 {
-    public class Role
+    public static class Role
     {
-        [StringLength(128)]
-        public string Id { get; set; }
+        public const string Admin = "admin";
+        public const string Manager = "manager";
+        public const string Master = "master";
 
-        [Required]
-        [StringLength(256)]
-        public string Name { get; set; }
+        public static string For(params string[] roles)
+        {
+            return string.Join(",", roles);
+        }
     }
 }

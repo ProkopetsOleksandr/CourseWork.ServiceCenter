@@ -27,11 +27,30 @@ namespace CourseWork.ServiceCenter.Controllers.API
             if (!String.IsNullOrWhiteSpace(query))
                 partsQuery = partsQuery.Where(p => p.Model.Contains(query));
                 
-            var partsDtos  = partsQuery
+            var partDtos  = partsQuery
                 .ToList()
                 .Select(Mapper.Map<Part, PartDto>);
 
-            return Ok(partsDtos);
+            return Ok(partDtos);
+        }
+
+        /// <summary>
+        /// Get parts that belong to service center
+        /// </summary>
+        /// <param name="id">service center id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public IHttpActionResult GetParts(int id)
+        {
+            var partDtos = _context.PartsInServiceCenters
+                .Include(p => p.Part)
+                .Include(p => p.Part.Brand)
+                .Include(p => p.Part.PartCategory)
+                .Where(p => p.ServiceCenterId == id)
+                .ToList()
+                .Select(p => Mapper.Map<Part, PartDto>(p.Part));
+
+            return Ok(partDtos);
         }
 
         [HttpDelete]

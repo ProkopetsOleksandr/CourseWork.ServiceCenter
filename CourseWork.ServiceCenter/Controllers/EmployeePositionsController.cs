@@ -1,4 +1,6 @@
-﻿using CourseWork.ServiceCenter.Models;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
+    [OnlyAllowed(Roles = Role.Admin)]
     public class EmployeePositionsController : Controller
     {
         private ApplicationDbContext _context;

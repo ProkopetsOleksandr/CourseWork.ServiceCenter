@@ -1,4 +1,6 @@
-﻿using CourseWork.ServiceCenter.Models;
+﻿using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,19 +18,24 @@ namespace CourseWork.ServiceCenter.Controllers
             _context = new ApplicationDbContext();
         }
 
-        // GET: Brands
         public ActionResult Index()
         {
             var brands = _context.Brands.ToList();
-            return View(brands);
+
+            if (User.IsInRole(Role.Admin))
+                return View("List", brands);
+
+            return View("ReadOnlyList", brands);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             var newBrand = new Brand();
             return View("BrandForm", newBrand);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var brandInDb = _context.Brands.SingleOrDefault(b => b.Id == id);
@@ -39,6 +46,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("BrandForm", brandInDb);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Save(Brand brand)
         {
             if(!ModelState.IsValid)

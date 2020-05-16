@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i> Каталог запчастин
+    </div>
+    <div class="card-body">
+
+
+        <div class="input-toggle-group mb-4">
+            <span>Всі запчастини</span>
+            <input id="parts-toggle" class="toggle" type="checkbox" name="" />
+            <span>Наявні запчастини сервіс центру</span>
+        </div>
+
+
+        <div class="table-responsive">
+            <table id="parts" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Модель</th>
+                        <th>Категорія</th>
+                        <th>Бренд</th>
+                        <th>Ціна</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Модель</th>
+                        <th>Категорія</th>
+                        <th>Бренд</th>
+                        <th>Ціна</th>
+                        <th>Дії</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/dataTable")
+
+    <script>
+        document.getElementById('parts-toggle').addEventListener("change", (event) => {
+            if (event.target.checked) {
+                /*Get brands of service center*/
+                var serviceCenterId = parseInt(@Session["serviceCenterId"]);
+
+                $('#parts').DataTable().clear().destroy();
+
+                $('#parts').DataTable({
+                    ajax: {
+                        url: "/api/parts",
+                        dataSrc: "",
+                        data: { id: serviceCenterId }
+                    },
+                    columns: [
+                        {
+                            data: "model"
+                        },
+                        {
+                            data: "partCategory.title"
+                        },
+                        {
+                            data: "brand.title"
+                        },
+                        {
+                            data: "price"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                var btns = "<div class='actions-btn'><a href='/parts/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>";
+
+                                return btns;
+                            }
+                        }
+                    ]
+                });
+
+                alert(serviceCenter);
+            } else {
+                /*Get all brands*/
+                $('#parts').DataTable().clear().destroy();
+
+                $('#parts').DataTable({
+                    ajax: {
+                        url: "/api/parts",
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "model"
+                        },
+                        {
+                            data: "partCategory.title"
+                        },
+                        {
+                            data: "brand.title"
+                        },
+                        {
+                            data: "price"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                var btns = "<div class='actions-btn'><a href='/parts/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>";
+
+                                return btns;
+                            }
+                        }
+                    ]
+                });
+            }
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+

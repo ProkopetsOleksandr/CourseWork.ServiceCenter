@@ -3,6 +3,8 @@ using CourseWork.ServiceCenter.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+using CourseWork.ServiceCenter.Attributes;
+using CourseWork.ServiceCenter.Models.Identity;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
@@ -18,9 +20,23 @@ namespace CourseWork.ServiceCenter.Controllers
         // GET: Part
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(Role.Admin))
+                return View("List");
+            
+            return View("ReadOnlyList");
         }
 
+        public ActionResult View(int id)
+        {
+            var partInDb = _context.Parts
+                .Include(p => p.Brand)
+                .Include(p => p.PartCategory)
+                .SingleOrDefault(p => p.Id == id);
+
+            return View(partInDb);
+        }
+
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult New()
         {
             var partViewModel = new PartFormViewModel
@@ -33,6 +49,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("PartForm", partViewModel);
         }
 
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Edit(int id)
         {
             var partInDb = _context.Parts.Find(id);
@@ -50,16 +67,7 @@ namespace CourseWork.ServiceCenter.Controllers
             return View("PartForm", partViewModel);
         }
 
-        public ActionResult View(int id)
-        {
-            var partInDb = _context.Parts
-                .Include(p => p.Brand)
-                .Include(p => p.PartCategory)
-                .SingleOrDefault(p => p.Id == id);
-
-            return View(partInDb);
-        }
-
+        [OnlyAllowed(Roles = Role.Admin)]
         public ActionResult Save(Part part)
         {
             if(!ModelState.IsValid)

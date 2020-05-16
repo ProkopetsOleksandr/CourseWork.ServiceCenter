@@ -1,10 +1,11 @@
 ﻿@model CourseWork.ServiceCenter.ViewModels.OrderServicesViewModel
 @{
     ViewBag.Title = "View";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
     <a href="/orders/view/@Model.OrderService.OrderId" class="btn btn-primary mt-4">Повернутись до замовлення</a>
+
+
 
 <div class="card mb-4 mt-4">
     <div class="card-header">
@@ -30,26 +31,36 @@
             </table>
         </div>
 
-        <h5>Виконання сервісу</h5>
+        <h5>Виконання сервісу</h5><a href="">content</a><i>EDIT</i>
 
-        <div class="table-responsive mb-3">
-            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                <tbody>
-                    <tr>
-                        <td>Виконавець</td>
-                        <td>@Model.OrderFulfillment.Employee.Name</td>
-                    </tr>
-                    <tr>
-                        <td>Дата початку</td>
-                        <td>@Model.OrderFulfillment.DateStart.ToShortDateString()</td>
-                    </tr>
-                    <tr>
-                        <td>Дата завершення</td>
-                        <td>@Model.OrderFulfillment.DateDone</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+
+        @if (Model.OrderFulfillment != null)
+        {
+            <div class="table-responsive mb-3">
+                <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td>Виконавець</td>
+                            <td>@Model.OrderFulfillment.Employee.Name</td>
+                        </tr>
+                        <tr>
+                            <td>Дата початку</td>
+                            <td>@Model.OrderFulfillment.DateStart</td>
+                        </tr>
+                        <tr>
+                            <td>Дата завершення</td>
+                            <td>@Model.OrderFulfillment.DateDone</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Виконання цього сервісу ше не призначено</p>
+        }
+
+
 
 
         <h5>Використані запчастини</h5>

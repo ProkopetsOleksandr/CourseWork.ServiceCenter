@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CourseWork.ServiceCenter.Models;
+using CourseWork.ServiceCenter.Models.Identity;
 
 namespace CourseWork.ServiceCenter.Controllers
 {
@@ -18,21 +19,13 @@ namespace CourseWork.ServiceCenter.Controllers
 
         public ActionResult Index()
         {
-            return View();
-        }
+            if (User.IsInRole(Role.Admin))
+                return View();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            if (User.IsInRole(Role.Manager))
+                return View("ManagerHome");
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View("MasterHome");
         }
     }
 }
