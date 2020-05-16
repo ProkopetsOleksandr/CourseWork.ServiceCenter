@@ -10,5 +10,6 @@ namespace CourseWork.ServiceCenter.ViewModels
     {
         public Order Order { get; set; }
         public Models.ServiceCenter ServiceCenter { get; set; }
+        public IEnumerable<ServiceType> ServiceTypes { get; set; }
     }
 }

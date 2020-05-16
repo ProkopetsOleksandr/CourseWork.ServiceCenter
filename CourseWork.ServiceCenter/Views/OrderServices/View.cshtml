@@ -31,10 +31,11 @@
             </table>
         </div>
 
-        <h5>Виконання сервісу</h5><a href="">content</a><i>EDIT</i>
+        <h5>Виконання сервісу</h5>
+        <a href="/ordersFulfillment/edit/@Model.OrderFulfillment.Id">Редагувати</a>
 
 
-        @if (Model.OrderFulfillment != null)
+        @if(Model.OrderFulfillment.EmployeeId != null)
         {
             <div class="table-responsive mb-3">
                 <table class="table table-bordered table-hover" width="100%" cellspacing="0">
@@ -61,20 +62,28 @@
         }
 
 
-
-
         <h5>Використані запчастини</h5>
 
         @if (Model.ServiceDetails.Count() > 0)
         {
             <div class="table-responsive">
                 <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Запчастина</th>
+                            <th>Ціна</th>
+                            <th>Кількість</th>
+                            <th>Сума</th>
+                        </tr>
+                    </thead>
                     <tbody>
-
                         @foreach (var detail in Model.ServiceDetails)
                         {
                             <tr>
                                 <td>@detail.PartInServiceCenter.Part.Model</td>
+                                <td>@detail.PartInServiceCenter.Part.Price</td>
+                                <td>@detail.Quantity</td>
+                                <td>@(detail.Quantity * @detail.PartInServiceCenter.Part.Price)</td>
                             </tr>
                         }
                     </tbody>

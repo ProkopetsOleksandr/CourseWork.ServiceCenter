@@ -47,6 +47,8 @@ namespace CourseWork.ServiceCenter.Controllers
             {
                 return View("MasterView", viewModel);
             }
+
+            ViewBag.Total = serviceInDb.TotalServicePrice.ToString();
             return View(viewModel);
         }
     }

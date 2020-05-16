@@ -43,7 +43,8 @@ namespace CourseWork.ServiceCenter.Controllers
             var viewModel = new OrderViewViewModel
             {
                 Order = orderInDb,
-                ServiceCenter = serviceCenter
+                ServiceCenter = serviceCenter,
+                ServiceTypes = _context.ServiceTypes.ToList()
             };
 
             return View(viewModel);

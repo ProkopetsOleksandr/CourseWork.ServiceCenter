@@ -295,6 +295,7 @@
     <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ServiceViewModel.cs" />
     <Compile Include="ViewModels\CityFormViewModel.cs" />
     <Compile Include="ViewModels\EmployeeFormViewModel.cs" />
     <Compile Include="ViewModels\OrderFulfillmentViewModel.cs" />

@@ -1,4 +1,5 @@
-﻿@model CourseWork.ServiceCenter.ViewModels.OrderViewViewModel
+﻿@using System.Web.UI.WebControls;
+@model CourseWork.ServiceCenter.ViewModels.OrderViewViewModel
 @{
     ViewBag.Title = "ViewCity";
 }
@@ -88,6 +89,17 @@
         </div>
 
 
+
+        <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseAddService" aria-expanded="false" aria-controls="collapseExample">
+            Додати сервіс
+        </button>
+        <div class="collapse" id="collapseAddService">
+            <div class="well">
+                @Html.DropDownList("Name", new SelectList(Model.ServiceTypes, "Id", "Name"), new { @class = "form-control mb-3", id = "service-id" })
+                <button id="add-service" class="btn btn-success float-right">Додати</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
 
     </div>
 </div>

@@ -1,6 +1,46 @@
 ﻿$(document).ready(function () {
 
 
+    $("#order-services").on("click", ".js-delete", function (event) {
+        event.preventDefault();
+        var button = $(this);
+
+        var orderServiceId = parseInt(button.attr("data-order-service-id"));
+
+        bootbox.confirm("Ви дійсно бажаєте видалити цей сервіс?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/services/deleteService",
+                    data: { "id": orderServiceId },
+                    method: "GET",
+                    success: function () {
+                        $('#order-services').DataTable().ajax.reload();
+                    }
+                });
+            }
+        });
+    });
+
+    $('#add-service').on('click', function () {
+        var serviceId = parseInt($('#service-id').val());
+        var orderId = parseInt($('#orderId').val());
+
+        $.ajax({
+            url: "/api/services",
+            data: { "orderId": orderId, "serviceId": serviceId },
+            method: "POST",
+            success: function () {
+                $('#order-services').DataTable().ajax.reload();
+            }
+        });
+    });
+
+
+
+
+
+
+
     $('#new-services').DataTable({
         ajax: {
             url: "/api/newOrderServices",
