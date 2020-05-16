@@ -18,7 +18,7 @@
                     data: { "id": orderServiceId },
                     method: "GET",
                     success: function () {
-                        $('#order-services'.Datatable().ajax.reload();
+                        $('#order-services').Datatable().ajax.reload();
                     }
                 });
             }

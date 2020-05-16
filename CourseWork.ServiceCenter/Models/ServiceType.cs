@@ -8,10 +8,12 @@ namespace CourseWork.ServiceCenter.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Назва")]
         [Required]
         [StringLength(150)]
         public string Name { get; set; }
 
+        [Display(Name = "Ціна")]
         public decimal Price { get; set; }
     }
 }

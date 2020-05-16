@@ -10,10 +10,12 @@ namespace CourseWork.ServiceCenter.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "ПІБ")]
         [Required]
         [StringLength(150)]
         public string Name { get; set; }
 
+        [Display(Name = "Номер телефону")]
         [Required]
         [StringLength(15)]
         public string Phone { get; set; }

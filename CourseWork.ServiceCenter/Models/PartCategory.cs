@@ -8,6 +8,7 @@ namespace CourseWork.ServiceCenter.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Назва")]
         [Required]
         [StringLength(200)]
         public string Title { get; set; }
