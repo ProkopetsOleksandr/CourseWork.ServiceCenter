@@ -43,6 +43,39 @@ namespace CourseWork.ServiceCenter.Controllers.API
             return Ok(orderDtos);
         }
 
+        [Route("api/orders/getFinishedOrders/")]
+        [HttpGet]
+        public IHttpActionResult GetFinishedOrders(int id)
+        {
+            var finishedOrders = _context.OrderFulfillments
+                .Include(f => f.OrderService)
+                .Include(f => f.OrderService.Order.Employee)
+                .Include(f => f.OrderService.Order.Customer)
+                .Where(f => f.OrderService.Order.Employee.ServiceCenterId == id && f.OrderService.Order.OrderDone == null)
+                .Select(f => new { id = f.Id, customer = f.OrderService.Order.Customer, orderId = f.OrderService.Order.Id, orderNumber = f.OrderService.Order.OrderNumber })
+                .ToList();
+
+            return Ok(finishedOrders);
+        }
+
+        [Route("api/orders/finishOrder/{id}")]
+        [HttpGet]
+        public IHttpActionResult FinishOrder(int id)
+        {
+            var fulfillmentInDb = _context.OrderFulfillments
+                .Include(f => f.OrderService.Order)
+                .SingleOrDefault(f => f.Id == id);
+            if(fulfillmentInDb == null)
+            {
+                return NotFound();
+            }
+
+            var orderInDb = _context.Orders.Find(fulfillmentInDb.OrderService.Order.Id);
+            orderInDb.OrderDone = System.DateTime.Now;
+            _context.SaveChanges();
+            return Ok();
+        }
+
         [HttpDelete]
         public IHttpActionResult DeleteOrder(int id)
         {

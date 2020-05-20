@@ -1,6 +1,57 @@
 ﻿$(document).ready(function () {
 
 
+
+    
+    var orderFulfillmentsTable = $('#finished-orders').DataTable({
+        ajax: {
+            url: "/api/orders/getFinishedOrders",
+            data: { 'id': parseInt($('#service-center-id').val()) },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "orderNumber",
+                render: function (data, type, element) {
+                    return "<a href='/orders/view/" + element.orderId + "'>" + element.orderNumber + "</a>";
+                }
+            },
+            {
+                data: "customer.name"
+            },
+            {
+                data: "customer.phone"
+            },
+            {
+                data: "id",
+                render: function (data) {
+                    return "<button class='btn btn-success js-done' data-fulfillment-id= " + data + "><i class='fas fa-check-double mr-1'></i>Завершити</button>";
+                }
+            }
+        ]
+    });
+
+
+    $("#finished-orders").on("click", ".js-done", function () {
+        var button = $(this);
+        var fulfillmentId = parseInt(button.attr("data-fulfillment-id"));
+
+        bootbox.confirm("Ви дійсно бажаєте завершити це замовлення?", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "/api/orders/finishOrder/" + fulfillmentId,
+                    method: "GET",
+                    success: function () {
+                        orderFulfillmentsTable.ajax.reload();
+                    }
+                });
+            }
+        });
+    });
+
+
+
+
     $("#order-services").on("click", ".js-delete", function (event) {
         event.preventDefault();
         var button = $(this);
@@ -34,11 +85,6 @@
             }
         });
     });
-
-
-
-
-
 
 
     $('#new-services').DataTable({
@@ -401,7 +447,6 @@
                 data: "id",
                 render: function (data) {
                     var btns = "<div class='actions-btn'><a href='/orders/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>" +
-                        "<a href='/orders/edit/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
                         "<a href='/orders/delete/" + data + "' class='btn-link js-delete' data-order-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;

@@ -18,7 +18,7 @@ namespace CourseWork.ServiceCenter.Controllers.API
         [HttpGet]
         public IHttpActionResult GetMasterServices(int id)
         {
-            var services = _context.Services.Where(s => s.EmployeeId == id);
+            var services = _context.Services.Where(s => s.EmployeeId == id).ToList();
             return Ok(services);
         }
 
@@ -95,6 +95,47 @@ namespace CourseWork.ServiceCenter.Controllers.API
 
 
 
+            return Ok();
+        }
+
+        /// <summary>
+        /// Set fullfilment dateStart
+        /// </summary>
+        /// <param name="id">fulfillment id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/services/setFulFillmentInProcess")]
+        public IHttpActionResult SetInProcess(int id)
+        {
+            var fulfillmentInDb = _context.OrderFulfillments.Find(id);
+            if(fulfillmentInDb == null)
+            {
+                return NotFound();
+            }
+
+            fulfillmentInDb.DateStart = System.DateTime.Now;
+            _context.SaveChanges();
+            return Ok();
+        }
+
+
+        /// <summary>
+        /// Set fullfilment dateEnd
+        /// </summary>
+        /// <param name="id">fulfillment id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/services/setFulfillmentFinished")]
+        public IHttpActionResult SetFinished(int id)
+        {
+            var fulfillmentInDb = _context.OrderFulfillments.Find(id);
+            if (fulfillmentInDb == null)
+            {
+                return NotFound();
+            }
+
+            fulfillmentInDb.DateDone = System.DateTime.Now;
+            _context.SaveChanges();
             return Ok();
         }
     }

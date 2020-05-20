@@ -60,9 +60,7 @@
             {
                 data: "userId",
                 render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/account/view/" + data + "' class='btn-link'><i class='fas fa-edit text-warning'></i></a>" +
-
-                        "<a href='/account/delete/" + data + "' class='btn-link js-delete' data-user-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
+                    var btns = "<div class='actions-btn'><a href='/account/delete/" + data + "' class='btn-link js-delete' data-user-id=" + data + "><i class='fas fa-trash-alt text-danger'></i></a></div>";
 
                     return btns;
                 }
@@ -224,7 +222,7 @@
     $('#partsInServiceCenter').DataTable({
         ajax: {
             url: "/api/PartsInServiceCenter/GetPartsInServiceCenter",
-            data: { 'id': $('#centerTargetId').val() },
+            data: { 'id': parseInt($('#centerTargetId').val()) },
             dataSrc: ""
         },
         columns: [
@@ -239,14 +237,6 @@
             },
             {
                 data: "quantity"
-            },
-            {
-                data: "id",
-                render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/partInServiceCenter/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a></div>";
-
-                    return btns;
-                }
             }
         ]
     });

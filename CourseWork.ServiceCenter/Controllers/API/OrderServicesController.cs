@@ -40,8 +40,8 @@ namespace CourseWork.ServiceCenter.Controllers.API
             if (partInServiceCenter == null)
                 return NotFound();
 
-
-
+            if (partInServiceCenter.Quantity < viewModel.Quantity)
+                return BadRequest("Недостатня кількість запчастин на складі.");
 
             var orderServiceInDb = _context.OrderServices.Find(viewModel.OrderServiceId);
             orderServiceInDb.TotalServicePrice += partInServiceCenter.Part.Price * viewModel.Quantity;
@@ -53,6 +53,8 @@ namespace CourseWork.ServiceCenter.Controllers.API
                 PartInServiceCenterId = partInServiceCenter.Id,
                 Quantity = viewModel.Quantity
             };
+
+            partInServiceCenter.Quantity -= viewModel.Quantity;
 
             _context.ServiceDetails.Add(serviceDetails);
             _context.SaveChanges();

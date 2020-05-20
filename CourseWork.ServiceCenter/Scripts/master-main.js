@@ -1,7 +1,37 @@
 ﻿$(document).ready(function () {
 
 
-    /* Parts in service center */
+    $('#service-start').on('click', function () {
+
+        var fulfillmentId = parseInt($('#fulfillmentId').val());
+
+        $.ajax({
+            url: "/api/services/setFulFillmentInProcess",
+            data: { 'id': fulfillmentId },
+            method: "GET",
+            success: function () {
+                window.location.reload(false);
+            }
+        });
+    });
+
+
+    $('#service-end').on('click', function () {
+
+        var fulfillmentId = parseInt($('#fulfillmentId').val());
+
+        $.ajax({
+            url: "/api/services/setFulfillmentFinished",
+            data: { 'id': fulfillmentId },
+            method: "GET",
+            success: function () {
+                window.location.reload(false);
+            }
+        });
+    });
+
+
+    /* Parts of service */
     $('#serviceParts').DataTable({
         ajax: {
             url: "/api/services/getParts",
@@ -63,6 +93,9 @@
             data: { "Quantity": quantityVal, "OrderServiceId": serviceId, "partId": partId, "serviceCenterId": serviceCenterId },
             success: function (response) {
                 $("#serviceParts").DataTable().ajax.reload();
+            },
+            error: function (responce) {
+                alert(responce.responseJSON.message);
             }
         });
 
@@ -102,13 +135,17 @@
             {
                 data: "dateStart",
                 render: function (data) {
-                    return data.substr(0, 10)
+                    if(data != null)
+                        return data.substr(0, 10)
+                    return data;
                 }
             },
             {
                 data: "dateDone",
                 render: function (data) {
-                    return data.substr(0, 10)
+                    if (data != null)
+                        return data.substr(0, 10)
+                    return data;
                 }
             },
             {
@@ -161,9 +198,56 @@
     });
 
 
+    /* Parts in service center */
+    $('#partsInServiceCenter').DataTable({
+        ajax: {
+            url: "/api/PartsInServiceCenter/GetPartsInServiceCenter",
+            data: { 'id': $('#centerTargetId').val() },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "part.partCode"
+            },
+            {
+                data: "part.model",
+            },
+            {
+                data: "part.price"
+            },
+            {
+                data: "quantity"
+            }
+        ]
+    });
 
+    /* Brands in service center */
+    $('#brandsInServiceCenter').DataTable({
+        ajax: {
+            url: "/api/ServiceCenterBrands",
+            data: { 'id': $('#centerTargetId').val() },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "brand.title"
+            }
+        ]
+    });
 
-
+    /* Service center device types */
+    $('#deviceTypesInServiceCenter').DataTable({
+        ajax: {
+            url: "/api/ServiceCenterDeviceTypes",
+            data: { 'id': $('#centerTargetId').val() },
+            dataSrc: ""
+        },
+        columns: [
+            {
+                data: "deviceType.title"
+            }
+        ]
+    });
 
 
     
@@ -324,48 +408,8 @@
         ]
     });
 
-    
-    /* Table of Customers */
-    $('#customers').DataTable({
-        ajax: {
-            url: "/api/customers/getcustomers",
-            dataSrc: ""
-        },
-        columns: [
-            {
-                data: "name"
-            },
-            {
-                data: "phone"
-            },
-            {
-                data: "id",
-                render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/customers/edit/" + data +"' class='btn-link'><i class='fas fa-edit text-warning'></i></a>";
-
-                    return btns;
-                }
-            }
-        ]
-    });
 
 
-    /* Table of Employees */
-    $('#employees').DataTable({
-        ajax: {
-            url: "/api/employees",
-            dataSrc: "",
-            data: {id: $("#centerId").val() }
-        },
-        columns: [
-            {
-                data: "name"
-            },
-            {
-                data: "phone"
-            }
-        ]
-    });
 
 
     /* Table of Device Types */
@@ -382,26 +426,7 @@
     });
 
 
-    /* Table of Cities */
-    $('#cities').DataTable({
-        ajax: {
-            url: "/api/cities",
-            dataSrc: ""
-        },
-        columns: [
-            {
-                data: "title",
-            },
-            {
-                data: "id",
-                render: function (data) {
-                    var btns = "<div class='actions-btn'><a href='/cities/view/" + data + "' class='btn-link'><i class='fas fa-eye text-primary'></i></a>";
 
-                    return btns;
-                }
-            }
-        ]
-    });
 
 
     /* Table of Brands */
